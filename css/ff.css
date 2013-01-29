@@ -3,3 +3,8 @@ body {
 	padding-bottom: 40px;
 	background: url('../img/github_page.jpg') no-repeat;
 }
+.post{
+	background: rgba(255,255,255,0.8);
+	padding: 0 20px;
+	margin-top: -20px;
+}
