@@ -35,7 +35,7 @@
         </div>
       </div>
     </div>
-	<div class="container">
+	<div class="container" id="c1">
 	{{ content }}
   </div>
 	<footer>
@@ -56,10 +56,10 @@
     <script src="http://fakefish.me/js/jquery.js"></script>
     <script type="text/javascript">
       $('#about').click(function () {
-        $('.container').load('http://fakefish.me/about.html #about');
+        $('#c1').load('http://fakefish.me/about.html #about');
       })
       $('#home').click(function () {
-        $('.container').load('http://fakefish.me/index.html .row');
+        $('#c1').load('http://fakefish.me/index.html #index');
       })
     </script>
 	</body>
