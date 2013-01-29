@@ -2,17 +2,14 @@
 layout: default
 title: Fakefish's Page
 ---
-
-
-  <div class="container">
-    <div class="row">
-      <div class="span4"></div>
-      <ul class="posts span8">
-        {% for post in site.posts %}
-          <li><span>{{ post.date | date_to_string }}</span> &raquo; <a href="{{ post.url }}">{{ post.title }}</a></li>
-        {% endfor %}
-    </ul>
-    </div>
-    <br>
+<div class="row">
+  <div class="span4"></div>
+  <ul class="posts span8">
+    {% for post in site.posts %}
+      <li><span>{{ post.date | date_to_string }}</span> &raquo; <a href="{{ post.url }}">{{ post.title }}</a></li>
+    {% endfor %}
+  </ul>
+</div>
+<br>
 
     
