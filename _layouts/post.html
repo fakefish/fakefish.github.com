@@ -2,6 +2,9 @@
 layout: default
 title: Fakefish'blog
 ---
+<head>
+<style type="text/css">body{background: none}</style>
+</head>
 <div id="post">
 {{ content }}
 </div>
@@ -16,12 +19,10 @@ title: Fakefish'blog
         dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
         (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
     })();
-
-    // remove the background of body
-    $('body').css('background-image','none');
 </script>
 <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
 <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+<!--
 <div id="related">
   {% if site.related_posts %}
   <h2>Related Posts</h2>
@@ -32,3 +33,4 @@ title: Fakefish'blog
   </ul>
   {% endif %}
 </div>
+-->
