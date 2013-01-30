@@ -1,0 +1,17 @@
+/* TEAM */
+    Founder & Developer: fakefish
+    Contact: fakefish.wjy [at] gmail.com
+    Weibo: @fakefish
+    Blog: http://fakefish.me
+
+/* THANKS */
+    Site: https://github.com
+    Site: http://jekyllrb.com/
+
+/* SITE */
+    Language: Chinese
+    Doctype: HTML5
+    Standards: HTML5, CSS3
+    Components: JQuery, BootStrap
+    Core: Jekyll, Github, 
+    IDE: Sublime Text 2
