@@ -1,0 +1,37 @@
+data:text/html, 
+<style type="text/css"> 
+#e { position:absolute; top:0; right:0; bottom:0; left:0; font-size:16px; } 
+</style> 
+<div id="e"></div> 
+<script src="http://d1n0x3qji82z53.cloudfront.net/src-min-noconflict/ace.js"></script>
+<script src="http://code.jquery.com/jquery-1.9.0.min.js"></script> 
+<script> 
+var myKey="SecretKeyz"; 
+$(document).ready(function(){ 
+  var e = ace.edit("e"); 
+  var url = "http://api.openkeyval.org/"+myKey; 
+  $.ajax({ 
+    url: url, 
+    dataType: "jsonp",
+    success: function(data){ 
+    e.setTheme("ace/theme/tomorrow_night_eighties");
+    e.getSession().setMode("ace/mode/markdown");
+    e.setValue(data); 
+    } 
+  });
+  $("#e").on("keydown", function (b) { 
+    if (b.ctrlKey && 83 == b.which) {
+      b.preventDefault(); 
+      var data = myKey+"="+encodeURIComponent(e.getValue()); 
+      $.ajax({ 
+        data: data, 
+        url: "http://api.openkeyval.org/store/",
+        dataType: "jsonp",
+        success: function(data){
+         alert("Saved."); 
+        } 
+      }); 
+  } 
+  }); 
+}); 
+</script>
