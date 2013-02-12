@@ -1,7 +1,7 @@
 body {
 	padding-top: 60px;
 	padding-bottom: 40px;
-	background: url('../img/github_page.jpg') no-repeat;
+	background: url('../img/github_page.jpg') no-repeat fixed;
 }
 .post{
 	background: rgba(255,255,255,0.8);
@@ -9,5 +9,6 @@ body {
 	margin-top: -20px;
 }
 #c1{
+	line-height: 1.8em;
 	min-height: 500px;
 }
