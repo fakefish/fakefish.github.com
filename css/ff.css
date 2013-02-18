@@ -12,3 +12,8 @@ body {
 	line-height: 1.8em;
 	min-height: 500px;
 }
+#alipay{
+	position: relative;
+	top: -20px;
+	left: 50px;
+}
