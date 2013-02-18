@@ -60,14 +60,22 @@
   </div>
   <!-- /container -->
 
-    <script src="http://fakefish.me/js/jquery.js"></script>
+    <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+    <script src="http://fakefish.me/js/prettify/perttify.js"></script>
     <script type="text/javascript">
-      $('#about').click(function () {
-        $('#c1').load('http://fakefish.me/about.html #about');
+      $(window).load(function(){
+        $('#about').click(function () {
+          $('#c1').load('http://fakefish.me/about.html #about');
+        })
+        $('#home').click(function () {
+          window.location = 'http://fakefish.me';
+        })
+        if($("pre")) {
+          $("pre").addClass("prettyprint");
+          prettyPrint();
+        }
       })
-      $('#home').click(function () {
-        window.location = 'http://fakefish.me';
-      })
+      
     </script>
 	</body>
 </html>
