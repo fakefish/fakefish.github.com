@@ -1,9 +1,9 @@
 ---
-layout:post
-title:windows下安装mongodb
+layout: post
+title: windows下安装mongodb
 ---
 
-{{ title }}
+#windows下安装mongodb
 
 先从[MongoDB](http://www.mongodb.org)下载对应的版本，win的是一个zip（怎么不是exe？= =
 
