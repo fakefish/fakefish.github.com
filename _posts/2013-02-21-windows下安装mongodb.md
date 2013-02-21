@@ -28,8 +28,8 @@ F:\mongodb\mongodb-win32-x86_64-2.2.3\bin\mongod.exe --logpath F:\mongodb\logs\m
 >***** SERVER RESTARTED *****
 >
 >Thu Feb 21 14:55:33 Trying to install Windows service 'MongoDB'
-Thu Feb 21 14:55:33 Service 'MongoDB' (Mongo DB) installed with command line '"F:\mongodb\mongodb-win32-x86_64-2.2.3\bin\mongod.exe" --logpath "F:\mongodb\logs\mongodb.log" --logappend --dbpath "F:\mongodb\data" --directoryperdb --service '
-Thu Feb 21 14:55:33 Service can be started from the command line with 'net start MongoDB'
+>Thu Feb 21 14:55:33 Service 'MongoDB' (Mongo DB) installed with command line '"F:\mongodb\mongodb-win32-x86_64-2.2.3\bin\mongod.exe" --logpath "F:\mongodb\logs\mongodb.log" --logappend --dbpath "F:\mongodb\data" --directoryperdb --service '
+>Thu Feb 21 14:55:33 Service can be started from the command line with 'net start MongoDB'
 
 ok了，就可以用管理员的cmd输入net start MongoDB开启，输入stop start MongoDB关闭
 
@@ -37,5 +37,5 @@ ok了，就可以用管理员的cmd输入net start MongoDB开启，输入stop st
 
 >***** SERVER RESTARTED *****
 >
->Thu Feb 21 14:55:11 Trying to install Windows service 'MongoDB'
-Thu Feb 21 14:55:11 Error connecting to the Service Control Manager: 拒绝访问。 (5)
+>Thu Feb 21 14:55:11 Trying to install Windows service >'MongoDB'
+>Thu Feb 21 14:55:11 Error connecting to the Service Control Manager: 拒绝访问。 (5)
