@@ -1,0 +1,65 @@
+<script type="text/javascript">
+  window.onload = initPage;
+  function initPage(){
+  	document.getElementById('username').onblur = checkUsername;
+    document.getElementById('register').disabled = true;
+    window.setInterval(scrollImages, 100);
+  }
+  function checkUsername(){
+  	// get a request object and send it to the server
+    request = createRequest();
+    if(request = null) {
+      alert("Unable to create request");
+    } else {
+      var theName = document.getElementById('username').value;
+      var username = escape(theName);
+      var url = "checkName.php?username=" + username;
+      request.onreadystatechange = showUsernameStatus;
+      request.open("GET", url, true);
+      request.send(null);
+    }
+  }
+  function showUsernameStatus(){
+  	// update the page to show whether the user name is okey
+  }
+  function createRequest(){
+    try {
+      request = new XMLHttpRequest();
+    } catch (tryMS) {
+      try {
+        request = new ActiveXObject("Msxml2.XMLHTTP");
+      } catch (otherMS) {
+        try {
+          request = new ActiveXObject("Microsoft.XMLHTTP")
+        } catch (failed) {
+          request = null;
+        }
+      }
+    }
+    return request;
+  }
+  function scrollImages() {
+    var coverBarDiv = document.getElementById('coverBar');
+    var images = coverBarDiv.getElementsByTagName('div');
+    for(var i=0; i < images.length; i++) {
+      var left = images[i].style.left.substr(0, images[i].style.left.length - 2);
+      if(left <= 0) {
+        left = 600;
+      }
+      images[i].style.left = (left - 10) + "px";
+    }
+  }
+</script>
+<style type="text/css">
+#coverBar div{float: left;background:#999;width:200px;height:100px;color:#fff;position:relative;}
+</style>
+<form>
+<input placeholder="username" type='text' id="username" />
+<input type="button" id="register" value='register'>
+</form>
+<div id='coverBar'>
+  <div>1</div>
+  <div>2</div>
+  <div>3</div>
+  <div>4</div>
+</div>

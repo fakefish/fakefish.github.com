@@ -1,0 +1,10 @@
+<% if (req.a) { %>
+  <p class='result'>
+    <%= req.a %> factorial = <%= req.result %>
+  </p>
+<% } %>
+<p>Enter a number to see it's factorial</p>
+<form name='factorial' action='/factorial' method='get'>
+  A:<input type='text' name='a' />
+  <input type='submit' value='Submit' />
+</form>

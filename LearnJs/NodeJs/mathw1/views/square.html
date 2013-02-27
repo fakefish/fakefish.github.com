@@ -1,0 +1,10 @@
+<% if (req.a) { %>
+  <p class='result'>
+     <%= req.a %> squared = <%= req.result %>
+  </p>
+<% } %>
+<p>Enter numbers to multiply</p>
+<form name='square' action='/square' method='get'>
+  A: <input type='text' name='a'>
+  <input type='submit' value='Submit'>
+</form>
