@@ -25,13 +25,16 @@ body {
 		background: none;
 	}
 	#c1{
-		width: 100%;
+		width: 98%;
 	}
 	.post{
 		padding: 0;
 	}
+	.span8 {
+		width: 100%;
+	}
 }
-@media (max-width: 300px){
+@media (max-width: 500px){
 	#alipay{
 		top: 10px;
 		left: 0;
