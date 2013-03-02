@@ -20,7 +20,7 @@ body {
 	top: -20px;
 	left: 50px;
 }
-@media (max-width: 970px){
+@media (max-width: 970px) and (min-width: 768px) {
 	body{
 		background: none;
 	}
@@ -34,9 +34,16 @@ body {
 		width: 100%;
 	}
 }
-@media (max-width: 500px){
+@media (max-width: 768px){
 	#alipay{
-		top: 10px;
-		left: 0;
+		display: block;
+		position: static;
+		margin-top: 5px;
+	}
+	body{
+		padding-left: 0;
+	}
+	.navbar .brand{
+		padding-left: 40px;
 	}
 }
