@@ -4,9 +4,12 @@ body {
 	background: url('../img/github_page.jpg') no-repeat fixed;
 }
 .post{
-	background: rgba(255,255,255,0.8);
+	background: rgba(255,255,255,0.95);
 	padding: 0 20px;
 	margin-top: -20px;
+}
+.post p{
+	text-indent: 2em;
 }
 #c1{
 	line-height: 1.8em;
@@ -16,4 +19,21 @@ body {
 	position: relative;
 	top: -20px;
 	left: 50px;
+}
+@media (max-width: 970px){
+	body{
+		background: none;
+	}
+	#c1{
+		width: 100%;
+	}
+	.post{
+		padding: 0;
+	}
+}
+@media (max-width: 300px){
+	#alipay{
+		top: 10px;
+		left: 0;
+	}
 }
