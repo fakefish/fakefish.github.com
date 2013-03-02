@@ -31,7 +31,11 @@ body {
 		padding: 0;
 	}
 	.container .span8 {
-		width: 100%;
+		width: 98%;
+	}
+	#index li a{
+		font-size: 4em;
+		line-height: 1.8em;
 	}
 }
 @media (max-width: 767px){
@@ -45,5 +49,10 @@ body {
 	}
 	.navbar .brand{
 		padding-left: 40px;
+	}
+	#index li a{
+		font-size: 2em;
+		display: block;
+		line-height: 1.8em;
 	}
 }
