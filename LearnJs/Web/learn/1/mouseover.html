@@ -1,0 +1,11 @@
+<style type="text/css">div{width: 100px;height: 100px;background: red;}.hover{background: blue;}</style>
+<div></div>
+<script>
+	var div=document.getElementsByTagName('div')[0];
+	div.onmouseover=function(){
+		div.className="hover";
+	}
+	div.onmouseout=function(){
+		div.className="";
+	}
+</script>

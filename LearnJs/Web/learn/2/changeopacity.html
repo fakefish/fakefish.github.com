@@ -1,0 +1,29 @@
+<style>
+	li{width: 150px;height: 150px;background: #fff;list-style: none;display: inline-block;opacity: 0.5;filter:alpha(opacity:50);
+		background: url(test.jpg);
+	}
+	.current{opacity: 1;filter:alpha(opacity:100);}
+</style>
+<ul>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+</ul>
+<script>
+	var lis=document.getElementsByTagName('li');
+	for(var i=0,len=lis.length;i<len;i++){
+		lis[i].onmouseover=function(){
+			this.className="current";
+		}
+		lis[i].onmouseout=function(){
+			this.className="";
+		}
+	}
+</script>

@@ -1,0 +1,11 @@
+<div>div1div1div1div1div1div1div1div1</div>
+<div>div2div2div2div2div2div2</div>
+<div>div<i>3</i>div<i>3</i>div<i>3</i>div<i>3</i>div<i>3</i>div<i>3</i></div>
+<script>
+	var divs=document.getElementsByTagName('div');
+	for(var i=0,len=divs.length;i<len;i++){
+		divs[i].onclick=function(){
+			alert(this.innerHTML);
+		}
+	}
+</script>

@@ -1,0 +1,17 @@
+<input type="text" value="input1">
+<input type="text" value="input2">
+<button>alert</button>
+<script>
+window.onload=function(){
+	var inputs=document.getElementsByTagName('input');
+	var button=document.getElementsByTagName('button')[0];
+	button.onclick=function(){
+		fun(inputs[0].value,inputs[1].value);
+	}
+}
+function fun(){
+	for(var i in arguments){
+		alert(arguments[i]);
+	}
+}
+</script>

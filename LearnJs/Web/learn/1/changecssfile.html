@@ -1,0 +1,17 @@
+<style type="text/css">.current{color:red}span{cursor: pointer;}</style>
+<link rel="stylesheet">
+<span title="red">red</span>
+<span title="blue">blue</span>
+<div id="div">this is a div</div>
+<script>
+	var btns=document.getElementsByTagName('span');
+	var link=document.getElementsByTagName('link');
+	for(var i=0,len=btns.length;i<len;i++){
+		btns[i].onclick=function(){
+			for(var j in btns)
+				btns[j].className="";
+			this.className="current";
+			link[0].setAttribute("href",this.title+".css");
+		}
+	}
+</script>

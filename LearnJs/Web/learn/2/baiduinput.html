@@ -1,0 +1,25 @@
+<style>
+	#ime{width: 50px;border:1px solid #9a99ff;padding: 0;margin: 0;display: none;}
+	#ime li{list-style: none;}
+	a{color: #00c;text-decoration: none;display: block;padding: 3px;}
+	a:hover{background: #d9e1f6;}
+	#close{border-top: 1px solid #9a99ff;}
+</style>
+<button>输入法</button>
+<ul id="ime">
+	<li><a href="">手写</a></li>
+	<li><a href="">拼音</a></li>
+	<li id="close"><a href="">关闭</a></li>
+</ul>
+<script>
+	var btn=document.getElementsByTagName('button')[0];
+	var ul=document.getElementById('ime');
+	btn.onclick=function(){
+		ul.style.display=ul.style.display==="block"?"none":"block";
+	}
+	var closeBtn=document.getElementById('close');
+	closeBtn.onclick=function(){
+		ul.style.display="none";
+		return false;
+	}
+</script>

@@ -1,0 +1,44 @@
+<style>
+	ul{width: 240px;}
+	ul li img{width: 80px;height: 80px;position: absolute;left: -10px;top:-10px;display: none;border: 1px solid #ccc;z-index: 100;}
+	ul li{list-style: none;float: left;margin-right: 10px;margin-bottom: 10px;position: relative;}
+	ul li a{display: inline-block;width: 50px;height: 50px;background: #ccc;}
+</style>
+<ul>
+	<li><a href="">test1</a><img src="test.jpg" alt=""></li>
+	<li><a href="">test2</a><img src="test1.jpg" alt=""></li>
+	<li><a href="">test3</a><img src="test2.jpg" alt=""></li>
+	<li><a href="">test1</a><img src="test.jpg" alt=""></li>
+	<li><a href="">test2</a><img src="test1.jpg" alt=""></li>
+	<li><a href="">test3</a><img src="test2.jpg" alt=""></li>
+	<li><a href="">test1</a><img src="test.jpg" alt=""></li>
+	<li><a href="">test2</a><img src="test1.jpg" alt=""></li>
+	<li><a href="">test3</a><img src="test2.jpg" alt=""></li>
+	<li><a href="">test1</a><img src="test.jpg" alt=""></li>
+	<li><a href="">test2</a><img src="test1.jpg" alt=""></li>
+	<li><a href="">test3</a><img src="test2.jpg" alt=""></li>
+	<li><a href="">test1</a><img src="test.jpg" alt=""></li>
+	<li><a href="">test2</a><img src="test1.jpg" alt=""></li>
+	<li><a href="">test3</a><img src="test2.jpg" alt=""></li>
+	<li><a href="">test1</a><img src="test.jpg" alt=""></li>
+	<li><a href="">test2</a><img src="test1.jpg" alt=""></li>
+	<li><a href="">test3</a><img src="test2.jpg" alt=""></li>
+</ul>
+<script>
+	var alist=document.getElementsByTagName('a');
+	var imgs=document.getElementsByTagName('img');
+	for(var i=0,len=alist.length;i<len;i++){
+		alist[i].onmouseover=function(){
+			this.nextSibling.style.display="block";
+		};
+		alist[i].onmouseout=function(){
+			this.nextSibling.style.display="";
+		};
+		imgs[i].onmouseover=function(){
+			this.style.display="block";
+		};
+		imgs[i].onmouseout=function(){
+			this.style.display="";
+		};
+	}
+</script>
