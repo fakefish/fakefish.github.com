@@ -1,0 +1,33 @@
+<style>
+    #box{width: 212px;}
+    #box li{float: left;width: 50px;height: 50px;margin: 3px 3px 0 0;}
+    #box .first{width: 156px;height: 156px;position: relative;}
+    #box .first div{background: url(img/loading.gif) center center no-repeat;position: absolute;top: 0;left: 0;width: 156px;height: 156px;opacity: 0.5;filter:opacity(50);display: none;}
+</style>
+<ul id="box">
+    <li class="first"><img src="img/big_1.jpg"><div></div></li>
+    <li><a href="javascript:;"><img src="img/small_1.jpg"></a></li>
+    <li><a href="javascript:;"><img src="img/small_2.jpg"></a></li>
+    <li><a href="javascript:;"><img src="img/small_3.jpg"></a></li>
+    <li><a href="javascript:;"><img src="img/small_4.jpg"></a></li>
+    <li><a href="javascript:;"><img src="img/small_5.jpg"></a></li>
+    <li><a href="javascript:;"><img src="img/small_6.jpg"></a></li>
+    <li><a href="javascript:;"><img src="img/small_7.jpg"></a></li>
+    <li><a href="javascript:;"><img src="img/small_8.jpg"></a></li>
+    <li><a href="javascript:;"><img src="img/small_9.jpg"></a></li>
+    <li><a href="javascript:;"><img src="img/small_10.jpg"></a></li>
+    <li><a href="javascript:;"><img src="img/small_11.jpg"></a></li>
+</ul>
+<script>
+    var imgs=document.getElementById('box').getElementsByTagName('img');
+    var load=document.getElementsByTagName('div')[0];
+    for(var i=1,len=imgs.length;i<len;i++){
+        imgs[i].onmouseover=function(){
+            var img=new Image();
+            img.src=imgs[0].src=this.src.replace(/small/,"big");
+            load.style.display="block";
+            img.complete?load.style.display="none":(img.onload=function(){load.style.display="none";})
+        }
+    }
+</script>
+<!-- 这个页面一开始并不知道怎么实现的，然后参考了http://fgm.cc/learn/lesson2/11.html,写出来的，主要是一个image的事件不知道 -->

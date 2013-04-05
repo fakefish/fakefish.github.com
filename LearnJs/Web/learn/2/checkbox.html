@@ -1,0 +1,61 @@
+<dl>
+    <dt><input type="checkbox" id="checkAll"><label>全选</label><a href="javascript:;">反选</a></dt>
+    <dd>
+        <p><input type="checkbox" name="item1"><label>选项（一）</label></p>
+        <p><input type="checkbox" name="item2"><label>选项（二）</label></p>
+        <p><input type="checkbox" name="item3"><label>选项（三）</label></p>
+        <p><input type="checkbox" name="item4"><label>选项（四）</label></p>
+        <p><input type="checkbox" name="item5"><label>选项（五）</label></p>
+        <p><input type="checkbox" name="item6"><label>选项（六）</label></p>
+        <p><input type="checkbox" name="item7"><label>选项（七）</label></p>
+        <p><input type="checkbox" name="item8"><label>选项（八）</label></p>
+        <p><input type="checkbox" name="item9"><label>选项（九）</label></p>
+        <p><input type="checkbox" name="item10"><label>选项（十）</label></p>
+    </dd>    
+</dl>
+<script>
+    var allbtn=document.getElementById('checkAll');
+    var allText=allbtn.nextSibling;
+    var fxbtn=allText.nextSibling;
+    var cbs=document.getElementsByTagName('dd')[0].getElementsByTagName('input');
+    var dl=document.getElementsByTagName('dl')[0];
+    fxbtn.onclick=function(){
+        for(var i=0,len=cbs.length;i<len;i++){
+            cbs[i].checked=cbs[i].checked===true?false:true;
+        }
+    }
+    allbtn.onclick=function(){
+        if(this.checked){
+            allText.innerHTML="全不选";
+            for(var i=0,len=cbs.length;i<len;i++){
+                if(!cbs[i].checked)
+                    cbs[i].checked=true;
+            }
+        }else{
+            allText.innerHTML="全选";
+            for(var i=0,len=cbs.length;i<len;i++){
+                if(cbs[i].checked)
+                    cbs[i].checked=false;
+            }
+        }
+    }
+    dl.onclick=function(){
+        if(allChecked()){
+            allText.innerHTML="全不选";
+            allbtn.checked=true;
+        }else{
+            allText.innerHTML="全选";
+            allbtn.checked=false;
+        }
+    }
+    function allChecked(){
+        var flag=false;
+        for(var i=0,n=0,len=cbs.length;i<len;i++){
+            cbs[i].checked===true && n++;
+        }
+        if(n===len){
+            flag=true;
+        }
+        return flag;
+    }
+</script>
