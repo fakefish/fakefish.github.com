@@ -1,0 +1,23 @@
+<input type="text"><input type="text">
+<br>
+<button>the bigger is:</button>
+<div id="result"></div>
+<script>
+	var result=document.getElementById('result');
+	var inputs=document.getElementsByTagName('input');
+	for(var i=0;i<2;i++){
+		inputs[i].onkeyup=function(){
+			this.value=this.value.replace(/[^\d]|(\s)/,"");
+		}
+	}
+	var btn=document.getElementsByTagName('button')[0];
+	btn.onclick=function(){
+		if(inputs[0].value===""||inputs[1].value===""){
+			alert("please type number");
+			return;
+		}
+		var a=parseInt(inputs[0].value);
+		var b=parseInt(inputs[1].value);
+		result.innerHTML=a>b?a:b;
+	}
+</script>
