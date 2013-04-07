@@ -1,4 +1,7 @@
-<div id="clock"><span>01</span>分<span>3</span>秒</div>
+<style>
+	.pause{background: red;}
+</style>
+<div id="clock"><span>1</span>分<span>40</span>秒</div>
 <button>启动</button>
 <script>
 	var clock=document.getElementById('clock');
@@ -7,22 +10,24 @@
 	var second=spans[1];
 	var btn=document.getElementsByTagName('button')[0];
 	var flag=null;
+	var sum=0;
 	btn.onclick=function(){
-		flag=setInterval(updateTime,1000);
+		this.className===""?(flag=setInterval(updateTime,1000)):(clearInterval(flag));
+		this.innerHTML=this.className===""?"暂停":"启动";
+		this.className=this.className===""?"pause":"";
+
+		sum=minute.innerHTML.toString().replace(/^0/,'')*60+parseInt(second.innerHTML.toString().replace(/^0/,''));
 	}
 	function updateTime(){
-		var sum=parseInt(minute.innerHTML.toString().replace(/^0/,''))*60+parseInt(second.innerHTML.toString().replace(/^0/,''));
 		sum--;
+		// console.log(sum);
+		minute.innerHTML=parseInt(sum/60);
+		second.innerHTML=sum%60;
 		if(sum<=0){
 			clearInterval(flag);
 			return;
 		}
-		console.log(sum);
-		if(sum/60>=1){
-			minute.innerHTML=parseInt(sum/60);
-			second.innerHTML=sum%60;
-		}else{
-			second=sum;
-		}
+		
+		
 	}
 </script>
