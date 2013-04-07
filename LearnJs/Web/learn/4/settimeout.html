@@ -1,5 +1,5 @@
 <style>
-    html,body,ul,li,p,div{margin: 0;padding:0;}
+    html,body,ul,li,p,div{margin: 0;padding:0;list-style: none;}
     #nav, #nav ul, #nav ul li, #nav ul li a:hover, #nav .subnav, #nav .subnav p, #nav .subnav p span, #nav .subnav .arrow{background: url(nav_bg.png) no-repeat;}
     #nav{position: relative;width: 910px;background-position: 0 -36px;margin: 10px auto;}
     #nav ul{height: 36px;line-height: 36px;margin-left: 10px;padding-right: 10px;overflow: hidden;background-position: right -72px;}
@@ -10,7 +10,7 @@
     #nav .subnav .arrow{position: absolute;top: -4px;display: block;width: 11px;height: 5px;background-position: 0 -261px;}
     #nav .subnav p{background-position: right -234px;margin-left: 10px;padding-right: 10px;}
     #nav .subnav p span{display: block;background-position: 0 -207px;background-repeat: repeat-x;height: 27px;}
-    #nav .subnav p a{display: inline;color: #235e99;text-decoration: none;margin: 0 5px;padding: 0 2px;font-size: 12px;}
+    #nav .subnav p a{display: inline;color: #235e99;text-decoration: none;margin: 0 5px;padding: 0 2px;font-size: 12px;width: auto;}
     #nav .subnav p a:hover{border-bottom: 2px solid #235e99;background: none;font-weight: normal;}
 </style>
 <div id="nav">
@@ -151,7 +151,14 @@
     }
     var nav=getId('nav');
     var li=getTag('li',nav);
-    for(var i=0,len=li.length;i<len;i++){
-        console.log(li[i]);
+    for(var i=1,len=li.length;i<len;i++){
+        li[i].onmouseover=function(){
+            for(var j=1;j<len;j++){
+                var all=getClass('subnav',li[j])[0];
+                all.style.display="none";
+            }
+            var subnav=getClass("subnav",this)[0];
+            subnav.style.display="block";
+        }
     }
 </script>
