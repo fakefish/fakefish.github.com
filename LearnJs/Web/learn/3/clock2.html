@@ -1,0 +1,28 @@
+<div id="clock"><span>01</span>分<span>3</span>秒</div>
+<button>启动</button>
+<script>
+	var clock=document.getElementById('clock');
+	var spans=clock.getElementsByTagName('span');
+	var minute=spans[0];
+	var second=spans[1];
+	var btn=document.getElementsByTagName('button')[0];
+	var flag=null;
+	btn.onclick=function(){
+		flag=setInterval(updateTime,1000);
+	}
+	function updateTime(){
+		var sum=parseInt(minute.innerHTML.toString().replace(/^0/,''))*60+parseInt(second.innerHTML.toString().replace(/^0/,''));
+		sum--;
+		if(sum<=0){
+			clearInterval(flag);
+			return;
+		}
+		console.log(sum);
+		if(sum/60>=1){
+			minute.innerHTML=parseInt(sum/60);
+			second.innerHTML=sum%60;
+		}else{
+			second=sum;
+		}
+	}
+</script>

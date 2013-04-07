@@ -92,6 +92,9 @@
 		if(/\=/.test(topcontent.value)||topcontent.value===""){
 			return;
 		}
+		if(/[^\d$]/.test(topcontent.value)&&content.value===""){
+			return;
+		}
 		content.value+="=";
 		put2top();
 		var string=topcontent.value.replace(/\=/,"");
