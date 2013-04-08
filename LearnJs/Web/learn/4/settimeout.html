@@ -159,6 +159,18 @@
             }
             var subnav=getClass("subnav",this)[0];
             subnav.style.display="block";
+            // 阻止事件冒泡
+            subnav.onmouseover=function(){
+                var event=event||window.event;
+                event.cancelBubble=true;
+                clearTimeout(time);
+            }
+        }
+        li[i].onmouseout=function(){
+            var subnav=getClass("subnav",this)[0];
+            time=setTimeout(function(){
+                subnav.style.display="none";
+            },1000);
         }
     }
 </script>
