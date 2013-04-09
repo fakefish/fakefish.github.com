@@ -31,6 +31,7 @@
     var index=0;
     var timer=null;
     var play=null;
+    var flag=true;
     // 给每个数字加上对应的效果
     for(var i=0,len=numbers.length;i<len;i++){
         numbers[i].index=i;
@@ -48,10 +49,21 @@
     autoplay();
     function autoplay(){
         play=setInterval(function(){
-            index++;
+            if(flag){
+                index++;
+            }else{
+                index--;
+            }
+            // flag为true时正序
+            // flag为false时倒序
             if(index>=imgs.length){
+                flag=false;
+                index-=2;
+            }else if(index<=0){
+                flag=true;
                 index=0;
             }
+            
             show(index);
         },2000)
     }
