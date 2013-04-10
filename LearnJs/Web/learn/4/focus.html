@@ -1,0 +1,18 @@
+<style>
+	.current{background: #ccc;border-color: green;outline: none}
+</style>
+<label for="username">username</label>
+<input type="text" placeholder="username" id="username">
+<label for="password">password</label>
+<input type="text" placeholder="password" id="password">
+<script>
+	var inputs=document.getElementsByTagName('input');
+	for(var i=0,len=inputs.length;i<len;i++){
+		inputs[i].onfocus=function(){
+			this.className="current";
+		}
+		inputs[i].onblur=function(){
+			this.className="";
+		}
+	}
+</script>

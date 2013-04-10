@@ -1,0 +1,89 @@
+<body>
+<div>January(1),February(2),March(3),April(4),May(5),June(6),July(7),Aguest(8),September(9),October(10),November(11),December(12)</div>
+<input type="button" value="删除January(1)">
+<input type="button" value="删除December(12)">
+<div>0,1,2,3,4,5,6,7,8,9</div>
+<input type="button" value="复制">
+<input type="button" value="还原">
+<div>red,green,blue,white,yellow,black,brown</div>
+<input type="button" value="还原">
+<input type="button" value="删除前三项">
+<input type="button" value="删除第二至三项">
+<input type="button" value="在第二项后插入(orange, purple)">
+<input type="button" value="替换第二项和第三项">
+<script>
+	var arrays=document.getElementsByTagName('div');
+	var btns=document.getElementsByTagName('input');
+	var cache=[];
+	var flag=true;
+	var flag1=true;
+	
+	var getarray=function(index){
+		return arrays[index].innerHTML.split(',');
+	}
+	// 第一组
+	btns[0].onclick=function(){
+		cache=getarray(0);
+		if(flag){
+			cache.shift();
+			this.value=this.value.replace("删除","添加");
+			flag=false;
+		}else{
+			cache.unshift("January(1)");
+			this.value=this.value.replace("添加","删除");
+			flag=true;
+		}
+		arrays[0].innerHTML=cache.join(',');
+	}
+	btns[1].onclick=function(){
+		cache=getarray(0);
+		if(flag1){
+			cache.pop();
+			this.value=this.value.replace("删除","添加");
+			flag1=false;
+		}else{
+			cache.push("January(12)");
+			this.value=this.value.replace("添加","删除");
+			flag1=true;
+		}
+		arrays[0].innerHTML=cache.join(',');
+	}
+	// 第二组先保存个副本
+	var cache1=getarray(1);
+	btns[2].onclick=function(){
+		var tmp=getarray(1);
+		arrays[1].innerHTML=tmp.concat(tmp)
+	}
+	btns[3].onclick=function(){
+		arrays[1].innerHTML=cache1.join(',');
+	}
+	// 第三组先保存个副本
+	// var cache2=getarray(2);
+	btns[4].onclick=function(){
+		var cache2=["red","green","blue","white","yellow","black","brown"];
+		arrays[2].innerHTML=cache2.join(',');
+	}
+	// 删除前三项
+	btns[5].onclick=function(){
+		var tmp=getarray(2);
+		arrays[2].innerHTML=tmp.splice(3).join();
+	}
+	// 删除第二至三项
+	btns[6].onclick=function(){
+		var tmp=getarray(2);
+		tmp.splice(1,2);
+		arrays[2].innerHTML=tmp.join();
+	}
+	// 第二项后插入(orange,purple)
+	btns[7].onclick=function(){
+		var tmp=getarray(2);
+		tmp.splice(2,0,"orange","purple");
+		arrays[2].innerHTML=tmp.join();
+	}
+	// 替换第二项和第三项
+	btns[8].onclick=function(){
+		var tmp=getarray(2);
+		tmp.splice(1,2,"#009900","#0000ff");
+		arrays[2].innerHTML=tmp.join();
+	}
+</script>
