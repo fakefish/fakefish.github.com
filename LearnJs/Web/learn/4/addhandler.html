@@ -1,0 +1,38 @@
+<button>毫无用处的按钮</button>
+<button>绑定click</button>
+<button>解除绑定</button>
+<script>
+	var btns=document.getElementsByTagName('button');
+	var EventUtil={
+		addHandler:function(element,type,handler){
+			if(element.addEventListener){
+				element.addEventListener(type,handler,false);
+			}else if(element.attachEvent){
+				element.attachEvent("on"+type,handler);
+			}else{
+				element["on"+type]=handler;
+			}
+		},
+		removeHandler:function(element,type,handler){
+			if(element.removeEventListener){
+				element.removeEventListener(type, handler, false);
+			}else if(element.detachEvent){
+				element.detachEvent("on"+type,handler);
+			}else{
+				element["on"+type]=null;
+			}
+		}
+	}
+	function btnclick(){
+		alert("可以点击了");
+	}
+	EventUtil.addHandler(btns[1],'click',function(){
+		btns[0].innerHTML="可以点击了";
+		EventUtil.addHandler(btns[0],'click',btnclick);
+	});
+	EventUtil.addHandler(btns[2],'click',function(){
+		EventUtil.removeHandler(btns[0],'click',btnclick);
+		btns[0].innerHTML="毫无用处的按钮";
+		
+	})
+</script>

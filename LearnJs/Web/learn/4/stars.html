@@ -1,0 +1,69 @@
+<style>
+body,div,ul,li,p{margin:0;padding:0;}
+body{color:#666;font:12px/1.5 Arial;}
+ul{list-style-type:none;}
+#star{position:relative;width:600px;margin:10px auto;}
+#star ul,#star span{float:left;display:inline;height:19px;line-height:19px;}
+#star ul{margin:0 10px;}
+#star li{float:left;width:24px;cursor:pointer;text-indent:-9999px;background:url(img/star.png) no-repeat;}
+#star strong{color:#f60;padding-left:10px;}
+#star li.on{background-position:0 -28px;}
+#star p{position:absolute;top:20px;width:159px;height:60px;display:none;background:url(img/icon.gif) no-repeat;padding:7px 10px 0;}
+#star p em{color:#f60;display:block;font-style:normal;}
+</style>
+<div id="star">
+    <span>点击星星就能打分</span>
+    <ul>
+        <li class=""><a href="javascript:;">1</a></li>
+        <li class=""><a href="javascript:;">2</a></li>
+        <li class=""><a href="javascript:;">3</a></li>
+        <li class=""><a href="javascript:;">4</a></li>
+        <li class=""><a href="javascript:;">5</a></li>
+    </ul>
+    <span></span>
+    <p><em><b>3</b> 分 一般</em>质量一般，没有卖家描述的那么好</p>
+</div>
+<script>
+    var box=document.getElementById('star');
+    var ul=document.getElementsByTagName('ul')[0];
+    var lis=box.getElementsByTagName('li');
+    var msg=box.getElementsByTagName('span')[1];
+    var msg1=box.getElementsByTagName('p')[0];
+    var appraises=[
+                "很不满意|差得太离谱，与卖家描述的严重不符，非常不满",
+                "不满意|部分有破损，与卖家描述的不符，不满意",
+                "一般|质量一般，没有卖家描述的那么好",
+                "满意|质量不错，与卖家描述的基本一致，还是挺满意的",
+                "非常满意|质量非常好，与卖家描述的完全一致，非常满意"
+    ];
+    var point=0;
+    for(var i=0,len=lis.length;i<len;i++){
+        lis[i].index=i;
+        lis[i].onmouseover=function(){
+            pointer(this.index+1);
+            msg1.style.display="block";
+            msg1.style.left=ul.offsetLeft+(this.index+1)*this.offsetWidth-104+"px";
+            // console.log(appraises[this.index].match(/^\w+\|/));
+            // 这里的正则不是很清楚。mark
+            msg1.innerHTML=
+            "<em><b>"+(this.index+1)+"</b> 分 "+
+            appraises[this.index].match(/(.+)\|/)[1]+"</em>"+
+            appraises[this.index].match(/\|(.+)/)[1];
+        }
+        lis[i].onclick=function(){
+            point=this.index+1;
+            msg1.style.display="none";
+            msg.innerHTML="<strong>"+point+"分</strong>("+appraises[point-1].match(/\|(.+)/)[1]+")";
+        }
+        lis[i].onmouseout=function(){
+            pointer(point);
+            msg1.style.display="none";
+        }
+    }
+    function pointer(index){
+        var pointer=index||point;
+        for(var i=0,len=lis.length;i<len;i++){
+            lis[i].className=i<pointer?"on":"";
+        }
+    }
+</script>
