@@ -1,0 +1,41 @@
+<style type="text/css">
+body,ul,li{margin:0;padding:0;}
+body{font:12px/24px arial;}
+#menu{position:absolute;width:100px;border-radius:3px;list-style-type:none;border:1px solid #8f8f8f;padding:2px;background:#fff;}
+#menu li{position:relative;height:24px;padding-left:24px;background:#eaead7;vertical-align:top;}
+#menu li a{display:block;color:#333;background:#fff;padding-left:5px;text-decoration:none;}
+#menu li.active{background:#999;}
+#menu li.active a{color:#fff;background:#8f8f8f;}
+#menu li em{position:absolute;top:0;left:0;width:24px;height:24px;background:url(img/ico.png) no-repeat;}
+#menu li em.cur{background-position:0 0;}
+#menu li em.copy{background-position:0 -24px;}
+#menu li em.paste{background-position:0 -48px;}
+</style>
+<ul id="menu">
+    <li><em class="cut"></em><a href="javascript:;">剪切</a></li>
+    <li><em class="copy"></em><a href="javascript:;">复制</a></li>
+    <li class=""><em class="paste"></em><a href="javascript:;">粘贴</a></li>
+</ul>
+<script>
+	var menu=document.getElementById('menu');
+	var lis=menu.getElementsByTagName('li');
+	menu.style.display="none";
+	for(var i=0,len=lis.length;i<len;i++){
+		lis[i].onmouseover=function(){
+			this.className="active";
+		}
+		lis[i].onmouseout=function(){
+			this.className="";
+		}
+	}
+	document.oncontextmenu=function(){
+		var event=event||window.event;
+		menu.style.display="block";
+		menu.style.left=event.clientX+"px";
+		menu.style.top=event.clientY+"px";
+		return false;
+	}
+	document.onclick=function(){
+		menu.style.display="none";
+	}
+</script>
