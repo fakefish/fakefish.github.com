@@ -1,0 +1,33 @@
+<style type="text/css">
+html,body{overflow:hidden;}
+body,div,h2,p{margin:0;padding:0;}
+body{color:#fff;background:#000;font:12px/2 Arial;}
+p{padding:0 10px;margin-top:10px;}
+span{color:#ff0;padding-left:5px;}
+#box{position:absolute;width:300px;height:150px;background:#333;border:2px solid #ccc;top:50%;left:50%;margin:-75px 0 0 -150px;}
+#box h2{height:25px;cursor:move;background:#222;border-bottom:2px solid #ccc;text-align:right;padding:0 10px;}
+#box h2 a{color:#fff;font:12px/25px Arial;text-decoration:none;outline:none;}
+</style>
+<div id="box">
+    <h2><a href="javascript:;">点击回放拖动轨迹</a></h2>
+    <p><strong>Drag:</strong><span></span></p>
+    <p><strong>offsetTop:</strong><span></span></p>
+    <p><strong>offsetLeft:</strong><span></span></p>
+</div>
+<script>
+	var oBox=document.getElementById('box');
+	var title=box.getElementsByTagName('h2')[0];
+	var dragText=box.getElementsByTagName('span')[0];
+	var topText=box.getElementsByTagName('span')[1];
+	var leftText=box.getElementsByTagName('span')[2];
+	var bDragable=false;
+	var disX=0;
+	var disY=0;
+	title.onmousedown=function(){
+		var event=event||window.event;
+		bDragable=true;
+		disX=event.clientX-oBox.offsetLeft;
+		disY=event.clientY-oBox.offsetTop;
+		return false;
+	}
+</script>
