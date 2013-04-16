@@ -1,0 +1,148 @@
+<style>
+	
+</style>
+<div id="weibo">
+	<div id="msgBox">
+		<h2>说说你在想什么</h2>
+		<form action="">
+			<input type="text" id="username" name="username">
+			<p id="face">
+				<img src="img/face.gif" alt="">
+				<img src="img/face1.gif" alt="">
+				<img src="img/face2.gif" alt="">
+			</p>
+			<br>
+			<textarea name="release" id="release" cols="30" rows="10"></textarea>
+			<p>
+        <span class="countTxt">还能输入</span><strong class="maxNum" style="">140</strong><span>个字</span>
+        <input id="sendBtn" type="button" value="广播" title="快捷键 Ctrl+Enter" class="">
+    	</p>
+		</form>
+	</div>
+	<div id="list">
+		<h3><span>大家在说</span></h3>
+		<ul>
+			<li class="lis">
+		        <div class="userPic"><img src="img/face.gif"></div>
+		        <div class="content">
+		            <div class="userName">
+		            	<a href="javascript:;">日丶久生情</a>:
+		            </div>
+		            <div class="msgInfo">新增删除广播功能。</div>
+		            <div class="times">
+		            	<span>07月05日 15:14</span>
+		            	<a class="del" href="javascript:;" style="display: none;">删除</a>
+		            </div>
+		        </div>
+			</li>
+			<li class="lis">
+		        <div class="userPic"><img src="img/face.gif"></div>
+		        <div class="content">
+		            <div class="userName">
+		            	<a href="javascript:;">日丶久生情</a>:
+		            </div>
+		            <div class="msgInfo">新增删除广播功能。</div>
+		            <div class="times">
+		            	<span>07月05日 15:14</span>
+		            	<a class="del" href="javascript:;" style="display: none;">删除</a>
+		            </div>
+		        </div>
+			</li>
+		</ul>
+	</div>
+</div>
+<script>
+	(function(){
+		// like $('#id'),$('.class'),$('div')
+		var Tanx=function(selector){
+				return new Tanx.fn.Find(selector);
+			},
+			document = window.document;
+		Tanx.fn=Tanx.prototype={
+			Find:function(selector,parent){
+				// if Tanx(null),Tanx(undfined)
+				if(!selector && typeof selector != "string")
+					return false;
+				var result=null;
+				if(/^\#/.test(selector)){
+					selector=selector.replace(/^\#/,'');
+					result=document.getElementById(selector);
+					if(result)
+						return result;
+					else
+						return false;
+				}else if(/^\./.test(selector)){
+					selector=selector.replace(/^\./,'');
+					result=[];
+					var target = parent||document;
+					var nodes=target.getElementsByTagName('*');
+					var classReg = new RegExp("(^| )"+ selector + "( |$)");
+					for(var i=0,len=nodes.length;i<len;i++){
+						if(nodes[i].className!== '' && classReg.test(nodes[i].className)){
+								result.push(nodes[i]);
+						}
+					}
+					return result;
+				} else if(/^\w+$/.test(selector)){
+					var target = parent || document;
+					return target.getElementsByTagName(selector);
+				}
+			},
+			// like Tanx.fn.bind($('#id'),'click',handler)
+			bind:function(element,type,handler){
+				if(element.addEventListener){
+					element.addEventListener(type,handler,false);
+				}else if(element.attachEvent){
+					element.attachEvent("on"+type,handler);
+				}else{
+					element["on"+type]=handler;
+				}
+				return true;
+			},
+			unbind:function(element, type, handler){
+			    if (element.removeEventListener){
+			      element.removeEventListener(type, handler, false);
+			    } else if(element.detachEvent){
+			      element.detachEvent("on" + type, handler);
+			    } else {
+			      element["on" + type]=null;
+			    }
+			    return true;
+			},
+			css:function(element,attribute,value){
+				if(typeof arguments[0] !== 'object')
+					return false;
+				var length=arguments.length;
+				if(length==2){
+					// like Tanx.fn.css(div,{'opacity':100,'width':100px})
+					if(typeof attribute === 'object'){
+						for(var i in attribute){
+							if(i==="opacity"){
+								setOpacity(element,attribute[i]);
+							}else{
+								element.style[i]=attribute[i];
+							}
+						}
+					}else{
+						// like Tanx.fn.css(div,'width');
+						return element.currentStyle?
+										element.currentStyle[attribute]:
+										getComputedStyle(obj,null)[attribute];
+					}
+				}else if(length === 3){
+					// like Tanx.fn.css(div, 'width','100px')
+					if(attribute==="opacity")
+						setOpacity(element,value);
+					else
+						element.style[attribute]=value;
+				}
+			}
+		};
+		function setOpacity(element,value){
+			element.style.filter="alpha(opacity="+value+")";
+			element.style.opacity=value/100;
+		}
+		window.$=window.Tanx=Tanx;
+	})()
+
+</script>
