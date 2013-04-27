@@ -295,9 +295,9 @@ body{color:#333;background:#3c3a3b;font:12px/1.5 \5b8b\4f53;}
 	var list = $('.list');
 	var ul = $('ul',list)[0];
 	var Data = function(name, index, content){
-		this.name=name;
+		this.name=encodeURI(name);
 		this.faceIndex=index+1;
-		this.content=content;
+		this.content=encodeURI(content);
 		var oDate = new Date();
 		this.time = {
 			month:format(oDate.getMonth()+1),
@@ -327,8 +327,8 @@ body{color:#333;background:#3c3a3b;font:12px/1.5 \5b8b\4f53;}
 		var li = document.createElement('li');
 		li.innerHTML = "<div class=\"userPic\"><img src=\"img/face" + data.faceIndex + ".gif\"></div>\
 							 <div class=\"content\">\
-							 	<div class=\"userName\"><a href=\"javascript:;\">" + data.name + "</a>:</div>\
-								<div class=\"msgInfo\">" + data.content.replace(/<[^>]*>|&nbsp;/ig, "") + "</div>\
+							 	<div class=\"userName\"><a href=\"javascript:;\">" + decodeURI(data.name) + "</a>:</div>\
+								<div class=\"msgInfo\">" + decodeURI(data.content.replace(/<[^>]*>|&nbsp;/ig, "")) + "</div>\
 								<div class=\"times\"><span>" + data.time.month + "月" + data.time.date + "日 " + data.time.hour + ":" + data.time.minute + "</span><a class=\"del\" href=\"javascript:;\">删除</a></div>\
 							 </div>";
 		ul.insertBefore(li,ul.firstChild);
