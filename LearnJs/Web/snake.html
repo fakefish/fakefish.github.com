@@ -107,8 +107,14 @@ window.onload=function(){
 		points:[],
 		init:function(arr){
 			var arr=arr||[[0,3],[0,2],[0,1],[0,0]];
-
+			if(this.body.toString()!=[]){
+				for(var i=0,len=this.body.length;i<len;i++){
+					this.hidden(this.body[i]);
+				}
+				this.hidden(this.points[0]);
+			}
 			this.body=arr;
+
 			this.render(arr);
 		},
 		render:function(arr){
@@ -133,6 +139,7 @@ window.onload=function(){
 			items[no].className='';
 		},
 		start:function(){
+			this.init();
 			this.keydown();
 			this.pointer();
 			this.move();
@@ -232,6 +239,8 @@ window.onload=function(){
 		stop:function(){
 			clearInterval(timer);
 			// alert('stop');
+			startBtn.innerHTML="开始";
+
 		},
 		pause:function(){
 			clearInterval(timer);
@@ -266,12 +275,6 @@ window.onload=function(){
 		}
 	};
 
-	// init snake
-	var line1=[[2,2],[2,1],[1,1],[0,1]],
-			line2=[[2,3],[2,2],[2,1],[2,0]],
-			line3=[[3,3],[3,2],[3,1],[3,0]];
-	Snake.init(line1);
-	// Snake.init();
 
 }
 
