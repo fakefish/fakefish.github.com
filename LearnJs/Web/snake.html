@@ -5,10 +5,13 @@
 	#snakeMain li{display: inline-block;width: 10px;height: 10px;}
 	#snakeMain ul.line li{border-right: 1px solid #ccc;border-bottom: 1px solid #ccc;width: 9px;height: 9px;}
 	#snakeMain li.active{background: #333}
+	#snakeMain li.point{background: red}
 	.btns{color: #fff;cursor: pointer;margin-left: 10px;}
 </style>
 <script>
-
+// author:    fakefish
+// website:   http://fakefish.me
+// email:     fakefish.wjy@gmail.com
 window.onload=function(){
 	var bgData=[],
 			timer=null;
@@ -99,8 +102,10 @@ window.onload=function(){
 		bTop:false,
 		bBottom:false,
 		body:[],
+		points:[],
 		init:function(arr){
 			var arr=arr||[[0,3],[0,2],[0,1],[0,0]];
+
 			this.body=arr;
 			this.render(arr);
 		},
@@ -127,6 +132,7 @@ window.onload=function(){
 		},
 		start:function(){
 			this.keydown();
+			this.pointer();
 			this.move();
 		},
 		keydown:function(){
@@ -209,9 +215,13 @@ window.onload=function(){
 			// console.log(flag);
 			if(flag){
 				this.body=next.concat(this.body);
-				last=this.body.pop();
+				if(next.toString()!==this.points.toString()){
+					last=this.body.pop();
+					this.hidden(last);
+				}else{
+					this.pointer();
+				}
 				this.render(this.body);
-				this.hidden(last);
 				// console.log(this.body)
 			} else {
 				this.stop();
@@ -236,6 +246,21 @@ window.onload=function(){
 				}
 			}
 			return false;
+		},
+		// set point
+		pointer:function(){
+			var num,x,y;
+			while(1){
+				num=Math.ceil(Math.random()*n);
+				x=Math.floor(num/100);
+				y=num-x*100;
+				if(!this.isContain([[x,y]])){
+					items[num].className="point";
+					this.points=[[x,y]];
+					break;
+				}
+			}
+			// this.points=[x,y];
 		}
 	};
 
@@ -245,7 +270,6 @@ window.onload=function(){
 			line3=[[3,3],[3,2],[3,1],[3,0]];
 	Snake.init(line1);
 	// Snake.init();
-	
 
 }
 
