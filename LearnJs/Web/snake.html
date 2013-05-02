@@ -6,6 +6,7 @@
 	#snakeMain ul.line li{border-right: 1px solid #ccc;border-bottom: 1px solid #ccc;width: 9px;height: 9px;}
 	#snakeMain li.active{background: #333}
 	#snakeMain li.point{background: red}
+	#snakeMain li.gray{background: gray}
 	.btns{color: #fff;cursor: pointer;margin-left: 10px;}
 </style>
 <script>
@@ -77,6 +78,14 @@ window.onload=function(){
 	}
 	body.insertBefore(startBtn,sm);
 
+	// 自动按钮
+	var autoplay1=document.createElement('a');
+	autoplay1.className='btns';
+	autoplay1.innerHTML='自动1';
+	autoplay1.onclick=function(){
+		Snake.autoPlayByCircle();
+	}
+	body.insertBefore(autoplay1,sm);
 
 	for(i=0;i<n;i++){
 		item=document.createElement('li');
@@ -103,8 +112,10 @@ window.onload=function(){
 		bRight:false,
 		bTop:false,
 		bBottom:false,
+		speed:100,
 		body:[],
 		points:[],
+		autoCom:null,
 		init:function(arr){
 			var arr=arr||[[0,3],[0,2],[0,1],[0,0]];
 			if(this.body.toString()!=[]){
@@ -114,7 +125,7 @@ window.onload=function(){
 				this.hidden(this.points[0]);
 			}
 			this.body=arr;
-
+			this.speed=100;
 			this.render(arr);
 		},
 		render:function(arr){
@@ -175,6 +186,17 @@ window.onload=function(){
 						bTop=that.bTop,
 						bRight=that.bRight,
 						bBottom=that.bBottom;
+				if(that.autoCom!==null){
+					that.circle();
+					// console.log(that.autoCom)
+					switch(that.autoCom){
+						case 'l':bLeft=true;break;
+						case 't':bTop=true;break;
+						case 'r':bRight=true;break;
+						case 'b':bBottom=true;break;
+					}
+					that.autoCom=false;
+				}
 				// 水平方向
 				if(headX===head1X){
 					if(!bTop&&!bBottom){
@@ -206,7 +228,7 @@ window.onload=function(){
 				}
 				that.direction([next]);
 				
-			},100);
+			},that.speed);
 		},
 		direction:function(next){
 			var last;
@@ -272,7 +294,71 @@ window.onload=function(){
 				}
 			}
 			// this.points=[x,y];
-		}
+		},
+		autoPlayByCircle:function(){
+			this.init();
+			this.autoCom=true;
+			this.speed=1;
+			this.pointer();
+			this.move();
+		},
+		times:0,
+		i:0,
+		circleFlag:false,
+		circle:function(){
+			flag=this.circleFlag;
+			var head=this.body[0].toString();
+			var n=this.times*2;
+			var com;
+			var rt,br,lb,lt;
+			if(!flag){	
+				rt=(0+n)+','+(99-n),
+				br=(49-n)+','+(99-n),
+				lb=(49-n)+','+n,
+				lt=(n+2)+','+n;
+			}else{
+				// 25,24 25,75 24,75 24,22
+				lt=(25-n)+','+(23-n);
+				lb=(26+n)+','+(23-n);
+				br=(26+n)+','+(76+n);
+				rt=(23-n)+','+(76+n);
+				
+			}
+			var i=this.i;
+			if(head===rt)
+				com=flag?'l':'b';
+			if(head===br)
+				com=flag?'t':'l';
+			if(head===lb)
+				com=flag?'r':'t';
+			if(head===lt)
+				com=flag?'b':'r';
+			// console.log(head);
+			if(typeof com==="string"){
+				i++;
+				if(i==4){
+					this.times++;
+					i=0;
+				}
+				if(i==3 && this.times==12){
+					com=false;
+					this.circleFlag=true;
+					this.times=0;
+					i=0;
+				}
+			}
+			if(head==='1,0'){
+				com='t';
+			}
+			if(head==='0,0'){
+				com='r';
+				this.circleFlag=false;
+				this.times=0;
+				i=0;
+			}
+			this.autoCom=com;
+			this.i=i;
+		},
 	};
 
 
