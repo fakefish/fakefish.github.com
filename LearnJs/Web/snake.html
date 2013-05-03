@@ -15,6 +15,8 @@
 // email:     fakefish.wjy@gmail.com
 // demo:      http://fakefish.me/LearnJs/Web/snake.html
 // code:      https://github.com/fakefish/fakefish.github.com/blob/master/LearnJs/Web/snake.html
+
+
 window.onload=function(){
 	var bgData=[],
 			timer=null;
@@ -78,7 +80,7 @@ window.onload=function(){
 	}
 	body.insertBefore(startBtn,sm);
 
-	// 自动按钮
+	// 自动按钮1
 	var autoplay1=document.createElement('a');
 	autoplay1.className='btns';
 	autoplay1.innerHTML='自动1';
@@ -87,13 +89,21 @@ window.onload=function(){
 	}
 	body.insertBefore(autoplay1,sm);
 
+	// 自动按钮2
+	var autoplay2=document.createElement('a');
+	autoplay2.className='btns';
+	autoplay2.innerHTML='自动2';
+	autoplay2.onclick=function(){
+		Snake.autoPlayByBFS();
+	}
+	body.insertBefore(autoplay2,sm);
+
 	for(i=0;i<n;i++){
 		item=document.createElement('li');
 		frag.appendChild(item);
 		// push into bdData
 		// the map data is a array 
 		// like [[0,0],[0,1].....[10,10],[10,11]]
-		
 		bgData.push([x,y]);
 		if(i%w!==w-1){
 			y++;
@@ -117,6 +127,7 @@ window.onload=function(){
 		points:[],
 		autoCom:null,
 		init:function(arr){
+			this.stop();
 			var arr=arr||[[0,3],[0,2],[0,1],[0,0]];
 			if(this.body.toString()!=[]){
 				for(var i=0,len=this.body.length;i<len;i++){
@@ -186,9 +197,13 @@ window.onload=function(){
 						bTop=that.bTop,
 						bRight=that.bRight,
 						bBottom=that.bBottom;
+				// autoplay
 				if(that.autoCom!==null){
-					that.circle();
-					// console.log(that.autoCom)
+					if(that.bCircle)
+						that.circle();
+					else if(that.bBfs){
+						that.snakeBFS();
+					}
 					switch(that.autoCom){
 						case 'l':bLeft=true;break;
 						case 't':bTop=true;break;
@@ -262,7 +277,12 @@ window.onload=function(){
 			clearInterval(timer);
 			// alert('stop');
 			startBtn.innerHTML="开始";
-
+			this.bCircle=false;
+			this.circleFlag=false;
+			this.autoCom=null;
+			this.i=0;
+			this.times=0;
+			this.bBfs=false;
 		},
 		pause:function(){
 			clearInterval(timer);
@@ -297,6 +317,7 @@ window.onload=function(){
 		},
 		autoPlayByCircle:function(){
 			this.init();
+			this.bCircle=true;
 			this.autoCom=true;
 			this.speed=1;
 			this.pointer();
@@ -304,6 +325,7 @@ window.onload=function(){
 		},
 		times:0,
 		i:0,
+		bCircle:false,
 		circleFlag:false,
 		circle:function(){
 			flag=this.circleFlag;
@@ -359,9 +381,73 @@ window.onload=function(){
 			this.autoCom=com;
 			this.i=i;
 		},
+
+
+		bBfs:false,
+		autoPlayByBFS:function(){
+			this.init();
+			this.bBfs=true;
+			this.autoCom=true;
+			// for(var i=0,len=bgData.length;i<len;i++){
+			// 	bgData[i].push(1);
+			// }
+			
+			this.speed=1;
+			this.pointer();
+			this.move();
+		},
+		snakeBFS:function(){
+			var body=this.body;
+			var n=new node(body[0],this.points[0]);
+			
+		}
 	};
-
-
+	var node=function(top,target){
+		this.top=top;
+		var x=top[0];
+		var y=top[1];
+		var xd=target[0]-x;
+		var yd=target[1]-y;
+		if(xd>0){
+			if(yd>0){
+				// right bottom
+				this.left=[x+1,y];
+				this.right=[x,y+1];
+			}else if(yd<0){
+				// left bottom
+				this.left=[x,y-1];
+				this.right=[x+1,y];
+			}else{
+				// bottom
+				this.left=[x+1,y];
+				this.right=[x+1,y];
+			}
+		}else if(xd<0){
+			if(yd>0){
+				// right top
+				this.left=[x,y+1];
+				this.right=[x-1,y];
+			}else if(yd<0){
+				// left top
+				this.left=[x,y-1];
+				this.right=[x+1,y];
+			}else{
+				// top
+				this.left=[x-1,y];
+				this.right=[x-1,y];
+			}
+		}else{
+			if(yd>0){
+				// right
+				this.left=[x,y+1];
+				this.right=[x,y+1];
+			}else{
+				// left
+				this.left=[x,y-1];
+				this.right=[x,y-1];
+			}
+		}
+	}
 }
 
 </script>
