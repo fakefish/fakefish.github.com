@@ -294,6 +294,7 @@ body{color:#333;background:#3c3a3b;font:12px/1.5 \5b8b\4f53;}
 	var subBtn = $('#sendBtn');
 	var list = $('.list');
 	var ul = $('ul',list)[0];
+  var bSend=false;
 	var Data = function(name, index, content){
 		this.name=encodeURI(name);
 		this.faceIndex=index+1;
@@ -312,34 +313,77 @@ body{color:#333;background:#3c3a3b;font:12px/1.5 \5b8b\4f53;}
 	subBtn.onmouseout = function(){
 		this.className="";
 	}
-	subBtn.onclick = function(){
-		if(/^\s*$/.test(userName.value)){
-			alert("please type your name.");
-			userName.focus();
-			return;
-		} 
-		if(/^\s*$/.test(conBox.value)){
-			alert("please say something.");
-			conBox.focus();
-			return;
-		}
-		var data = new Data(userName.value, faceIndex, conBox.value);
-		var li = document.createElement('li');
-		li.innerHTML = "<div class=\"userPic\"><img src=\"img/face" + data.faceIndex + ".gif\"></div>\
-							 <div class=\"content\">\
-							 	<div class=\"userName\"><a href=\"javascript:;\">" + decodeURI(data.name) + "</a>:</div>\
-								<div class=\"msgInfo\">" + decodeURI(data.content.replace(/<[^>]*>|&nbsp;/ig, "")) + "</div>\
-								<div class=\"times\"><span>" + data.time.month + "月" + data.time.date + "日 " + data.time.hour + ":" + data.time.minute + "</span><a class=\"del\" href=\"javascript:;\">删除</a></div>\
-							 </div>";
-		ul.insertBefore(li,ul.firstChild);
-		Tanx.fn.slideDown(li);
-		lisHover();
+	subBtn.onclick = fnSend;
+  Tanx.fn.eventHandler(document,'keyup',function(event){
+    var event=event||window.event;
+    if(event.ctrlKey && event.keyCode=== 13)
+      fnSend();
+  })
 
-		// reset form
-		form.reset();
-		faceIndex=0;
-		selectface();
-	}
+  function fnSend(){
+    if(/^\s*$/.test(userName.value)){
+      alert("请输入您的名字");
+      userName.focus();
+      return;
+    } else if(!/^[u4e00-\u9fa5\w]{2,8}$/g.test(userName.value)){
+      // 检测2-8位的中文名字
+      alert("名字只能是2-8位的字母数字下划线汉字");
+      userName.focus();
+      return;
+    }else if(/^\s*$/.test(conBox.value)){
+      alert("请输入内容");
+      conBox.focus();
+      return;
+    }else if(!bSend){
+      alert("请合法输入");
+      conBox.focus();
+      return;
+    }
+    var data = new Data(userName.value, faceIndex, conBox.value);
+    var li = document.createElement('li');
+    li.innerHTML = "<div class=\"userPic\"><img src=\"img/face" + data.faceIndex + ".gif\"></div>\
+               <div class=\"content\">\
+                <div class=\"userName\"><a href=\"javascript:;\">" + decodeURI(data.name) + "</a>:</div>\
+                <div class=\"msgInfo\">" + decodeURI(data.content.replace(/<[^>]*>|&nbsp;/ig, "")) + "</div>\
+                <div class=\"times\"><span>" + data.time.month + "月" + data.time.date + "日 " + data.time.hour + ":" + data.time.minute + "</span><a class=\"del\" href=\"javascript:;\">删除</a></div>\
+               </div>";
+    ul.insertBefore(li,ul.firstChild);
+    Tanx.fn.slideDown(li);
+    lisHover();
+
+    // reset form
+    form.reset();
+    faceIndex=0;
+    selectface();
+    number.innerHTML="140";
+  }
+
+  // 限制字数
+  Tanx.fn.eventHandler(conBox,'keyup',limit);
+  Tanx.fn.eventHandler(conBox,'focus',limit);
+  Tanx.fn.eventHandler(conBox,'change',limit);
+  Tanx.fn.eventHandler(conBox,'blur',limit);
+  var number=$('.maxNum')[0];
+  var countTxt=$('.countTxt')[0];
+  var maxNum=parseInt(number.innerHTML);
+  function limit(){
+    var iLen=0;
+    for(var i=0,len=conBox.value.length;i<len;i++){
+      // 检测汉字或全角个数，如果不是就折半
+      iLen+=/^[^\x00-\xff]/g.test(conBox.value.charAt(i))?1:0.5;
+      number.innerHTML=Math.abs(maxNum-Math.floor(iLen));
+      if(iLen<=maxNum){
+        Tanx.fn.css(number,'color','');
+        countTxt.innerHTML="还能输入";
+        bSend=true;
+      }else{
+        Tanx.fn.css(number,'color','red');
+        countTxt.innerHTML="已经超出";
+        bSend=false;
+      }
+    }
+  }
+
 	function format(str){
 		// 如果是一位数字，就在前面加个0
 		return str.toString().replace(/^(\d)$/,"0$1")
