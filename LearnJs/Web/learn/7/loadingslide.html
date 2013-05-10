@@ -31,7 +31,7 @@ body{font:12px/1.5 \5fae\8f6f\96c5\9ed1;background:#000;}
 		{"src" : "http://img1.gtimg.com/news/pics/hv1/99/238/825/53706414.jpg", "title" : "7月26日，一名工人在事故现场最后一节车厢上作业。"},
 		{"src" : "http://img1.gtimg.com/news/pics/hv1/100/238/825/53706415.jpg", "title" : "7月26日，工人在给最后一节车厢盖上彩条布，准备运离现场。"}
 	];
-	var img=document.getElementsByTagName('img')[0];
+	var img=document.getElementsByTagName('img');
 	var box=document.getElementById('big');
 	var span=box.getElementsByTagName('span')[0];
 	var title=document.getElementById('title');
@@ -89,44 +89,42 @@ body{font:12px/1.5 \5fae\8f6f\96c5\9ed1;background:#000;}
 	}
 
 
-	function loadImg(target,src,callback){
+	function loadImg(){
 		box.className="loading";
-		target.src="";
-		var tmpImg=new Image();
-		tmpImg.src=src;
-		tmpImg.complete=tmpImg.onload=function(){
-			target.src=src;
-			callback&&callback();
-		}
-	}
-	function load(i){
-		loadImg(img,imgData[i].src,function(){
+		title.style.height=0;
+		setOpacity(span,0);
+		// 似乎是有索引才能删除节点
+		img[0]&&box.removeChild(img[0]);
+		var temp=document.createElement('img');
+		var newImg=new Image();
+		newImg.onload=function(){
 			box.className="";
-			if(img.offsetWidth>800){
-				img.style.width=800+"px";
-				console.log(img.offsetWidth)
-			}
-			img.style.height=img.offsetHeight*img.offsetWidth/img.offsetWidth+"px";
+			temp.src=this.src;
+			box.appendChild(temp);
+			temp.style.width=(temp.offsetWidth>800?800:temp.offsetWidth)+"px";
+			box.style.height=temp.style.height=temp.offsetHeight*temp.offsetWidth/temp.offsetWidth+"px";
+			span.innerHTML=imgData[index].title;
 			startMove(title, 'height', 50, function(){
 				startMove(span, 'opacity', 100);
-			});
-			span.innerHTML=imgData[i].title;
-		});
+			})
+		}
+		newImg.src=imgData[index].src;
 	}
-	load(index);
+	loadImg(index);
 	maskR.onclick=right.onclick=function(){
 		if(index>imgData.length-2){
 			alert("后面没有了");
 			return;
 		}
-		load(++index);
-		// console.log(index)
+		index++;
+		loadImg();
 	}
 	maskL.onclick=left.onclick=function(){
 		if(index<1){
 			alert("前面没有了");
 			return;
 		}
-		load(--index);
+		index--;
+		loadImg();
 	}
 </script>
