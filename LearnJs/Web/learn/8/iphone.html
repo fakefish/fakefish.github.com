@@ -10,12 +10,60 @@
 	var box=document.getElementById('iphone');
 	var lock=document.getElementById('lock');
 	var btn=lock.getElementsByTagName('span')[0];
-	var length=lock.offsetWidth;
+	var length=lock.offsetWidth-btn.offsetWidth;
+	var img=new Image();
+	img.src="img/2.jpg";
+	var dis;
+	var event;
+	var l;
 
-	var x,
-		event;
+	btn.onmousedown=function(event){
+		event=event||window.event;
+		dis=event.clientX-this.offsetLeft;
 
-	btn.onmousedown=function(){
+		document.onmousemove=function(event){
+			event=event||window.event;
+			l=event.clientX-dis;
+
+			if(l<0) l=0;
+			if(l>length) l=length;
+
+			btn.style.left=l+'px';
+			
+		}
+		document.onmouseup=function(event){
+			event=event||window.event;
+			document.onmousemove=null;
+			// document.
+			btn.releaseCapture && btn.releaseCapture();
+			// console.log(btn.offsetLeft+" "+length)
+			if(btn.offsetLeft>(length+btn.offsetWidth)/2)
+				move(length,end);
+			else
+				move(0);
+		}
+		this.setCapture&&this.setCapture();
+		return false;
+	}
+	function move(x, callback){
 		
+		clearInterval(btn.timer);
+		btn.timer=setInterval(function(){
+			doMove(x,callback);
+		},30);
+	}
+	function doMove(x, callback){
+		var speed=(x-btn.offsetLeft)/5;
+		speed=speed>0?Math.ceil(speed):Math.floor(speed);
+		if(x==btn.offsetLeft){
+			clearInterval(btn.timer);
+			callback&&callback();
+			return;
+		}
+		btn.style.left=btn.offsetLeft+speed+"px";
+	}
+	function end(){
+		box.style.background="url("+img.src+")";
+		lock.style.display='none';
 	}
 </script>
