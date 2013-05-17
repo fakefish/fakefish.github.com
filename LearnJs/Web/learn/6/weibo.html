@@ -117,7 +117,7 @@ body{color:#333;background:#3c3a3b;font:12px/1.5 \5b8b\4f53;}
 		Tanx.fn=Tanx.prototype={
 			Find:function(selector,parent){
 				// if Tanx(null),Tanx(undefined)
-				if(!selector && typeof selector != "string")
+				if(!selector || typeof selector != "string")
 					return false;
 				var result=null;
 				// if id
