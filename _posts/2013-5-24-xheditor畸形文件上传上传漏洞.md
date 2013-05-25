@@ -30,4 +30,10 @@ Public Function GetFileExt(FullPath)
 End function
 </pre>
 
-把这里的InStrRev替换为InStr就好了，后果就是以后上传的文件中不能含两个以上的'.'了
+把这里的InStrRev替换为InStr就好了，后果就是以后上传的文件中不能含两个以上的'.'了,想想还是算了,改回去,然后在if里加了条 
+
+<pre>
+	if FullPath &lt;&gt; "" and instr(FullPath,";")&lt;0 then
+</pre>
+
+他娘的没效果..默默地改回去
