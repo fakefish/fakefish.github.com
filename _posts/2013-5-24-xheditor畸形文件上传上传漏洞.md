@@ -16,3 +16,18 @@ title: xheditor畸形文件上传上传漏洞
 然后把这个后缀加上，编辑器就会拒绝上传了。
 
 >NoAllowExt=".asp;jpg"
+
+但是这造成的后果就是jpg也不能上传了,纠结了一中午,发现一处
+
+<pre>
+'取得文件的后缀名
+Public Function GetFileExt(FullPath)
+  If FullPath &lt;&gt; "" Then
+    GetFileExt = LCase(Mid(FullPath,InStrRev(FullPath, ".")+1))
+    Else
+    GetFileExt = ""
+  End If
+End function
+</pre>
+
+把这里的InStrRev替换为InStr就好了，后果就是以后上传的文件中不能含两个以上的'.'了
