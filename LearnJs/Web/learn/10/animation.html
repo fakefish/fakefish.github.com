@@ -1,0 +1,105 @@
+<style>
+body,div{margin:0;padding:0;}
+#wrap{width:500px;margin:10px auto;}
+.box{position:relative;height:100px;border:1px solid #666;margin-top:10px;}
+.box span{position:absolute;top:10px;left:10px;width:20px;height:20px;background:#999;display:block;opacity:1;}
+</style>
+<div id="wrap">
+    <input type="button" value="开始" />
+    <div class="box"><span></span></div>
+</div>
+<script>
+	var Animation=function(element,path,callback){
+		this.init(element, path, callback);
+	}
+	Animation.prototype={
+		init:function(element, path, callback){
+			this.target=element;
+			this.path=path;
+
+			this.play();
+			callback&&(this.callback=callback);
+		},
+		css:function(attr, value){
+			var element=this.target;
+			if(arguments.length==1){
+				return parseFloat(element.currentStyle?
+					element.currentStyle[attr]:
+					getComputedStyle(element, null)[attr]);
+			}else if(arguments.length==2){
+				if(attr=='opacity'){
+
+					element.style.filter='alpha(opacity='+value+')';
+					element.style.opacity=value/100;
+				}else{
+					element.style[attr]=value+'px';
+				}
+			}
+		},
+		play:function(){
+			var that=this;
+			clearInterval(that.timer);
+			this.timer=setInterval(function(){
+				that.move();
+			},30);
+		},
+		move:function(){
+			var path=this.path;
+			var complete=true;
+			var current,step;
+			for(var i in path){
+				current=i=='opacity'?parseInt(this.css(i).toFixed(2)*100):this.css(i);
+				step=(path[i]-current)/5;
+				step=step>0?Math.ceil(step):Math.floor(step);
+				if(current!=path[i]){
+					complete=false;
+					this.css(i, current+step);
+				}
+			}
+			if(complete){
+				clearInterval(this.timer);
+				this.callback&&this.callback.call();
+			}
+		}
+	};
+	window.onload=function(){
+		var span=document.getElementsByTagName('span')[0];
+		var btn=document.getElementsByTagName('input')[0];
+		var paths=[
+			{width:20, height:20},
+			{width:80, height:80},
+			{left:10}, {left:408},
+			{opacity:100},
+			{opacity:0},
+			{opacity:100},
+			{width:80, height:80, left:408},
+			{top:10},
+			{width:20, height:20, left:468},
+			{top:70},
+			{left:10},
+			{top:10},
+			{left:468},
+			{width:20, height:20, left:468},
+			{width:80, height:80, left:408}
+		];
+		var order=true;
+		var i=0;
+		btn.onclick=function(){
+			var that=this;
+			this.disabled=true;
+			function begin(){
+				order?i++:i--;
+				var obj=new Animation(span, paths[i], begin);
+				if(i==paths.length||i<0){
+					clearInterval(obj.timer);
+					order=!order;
+					that.value=order?'开始':'原路返回';
+					that.disabled=false;
+					return;
+				}
+			}
+			begin();
+		}
+
+	}
+</script>

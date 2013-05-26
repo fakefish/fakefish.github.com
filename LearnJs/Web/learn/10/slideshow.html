@@ -12,19 +12,113 @@ body{background:#000;text-align:center;font:12px/20px Arial;}
 #tmp{width:100px;height:100px;background:red;position:absolute;}
 </style>
 <div id="box">
-    <div class="list">
-        <ul>
-            <li><img src="img/2/01.jpg" width="490" height="170" /></li>
-            <li><img src="img/2/02.jpg" width="490" height="170" /></li>
-            <li><img src="img/2/03.jpg" width="490" height="170" /></li>
-            <li><img src="img/2/04.jpg" width="490" height="170" /></li>
-            <li><img src="img/2/05.jpg" width="490" height="170" /></li>
-        </ul>
-    </div>
+  <div class="list">
+    <ul>
+      <li><img src="img/2/01.jpg" width="490" height="170" /></li>
+      <li><img src="img/2/02.jpg" width="490" height="170" /></li>
+      <li><img src="img/2/03.jpg" width="490" height="170" /></li>
+      <li><img src="img/2/04.jpg" width="490" height="170" /></li>
+      <li><img src="img/2/05.jpg" width="490" height="170" /></li>
+    </ul>
+  </div>
 </div>
 <script>
-	var slideShow={};
+	var slideShow=function(box){
+		this.init(box);
+	};
 	slideShow.prototype={
-		
-	}
+		init:function(box){
+			this.box=box;
+			this.list=box.getElementsByTagName('ul')[0];
+			this.lists=box.getElementsByTagName('li');
+			this.imgHeight=box.getElementsByTagName('img')[0].offsetHeight;
+			this.currentIndex=0;
+
+			var that=this;
+			window.onload=function(){
+				that.insertNum();
+				that.autoPlay();
+			}
+	  },
+	  insertNum:function(){
+	  	var i,len;
+	  	// insert numbers
+			var frag=document.createDocumentFragment();
+			var that=this;
+
+			for(i=0,len=this.lists.length;i<len;i++){
+				var item=document.createElement('li');
+				item.innerHTML=i+1;
+				frag.appendChild(item);
+			}
+			ul=document.createElement('ul');
+			ul.className='count';
+			ul.appendChild(frag);
+			box.appendChild(ul);
+			this.ul=ul;
+
+			this.numbers=ul.getElementsByTagName('li');
+			this.numbers[0].className='current';
+
+			for(i=0,len=this.numbers.length;i<len;i++){
+				this.numbers[i].index=i;
+				this.numbers[i].onmouseover=function(){
+					that.slide(this.index);
+				}
+			}
+	  },
+	  autoPlay:function(){
+	  	var that=this;
+	  	clearInterval(this.timer);
+	  	this.box.onmouseover=function(){
+	  		clearInterval(that.timer);
+	  	}
+	  	this.box.onmouseout=function(){
+	  		that.timer=setInterval(function(){
+	  			that.play();
+	  		},2000);
+	  	}
+	  	// console.log(this.play)
+	  	this.timer=setInterval(function(){
+	  		that.play();
+	  	},2000);
+	  },
+	  play:function(){
+	  	if(this.currentIndex++<4){
+	  		this.slide(this.currentIndex);
+	  	}else{
+	  		this.currentIndex=0;
+	  		this.slide(this.currentIndex);
+	  	}
+	  },
+	  slide:function(index){
+	  	clearInterval(this.slider);
+	  	var step;
+	  	var top;
+	  	var i,len;
+	  	var target;
+	  	var that=this;
+	  	for(i=0,len=this.numbers.length;i<len;i++){
+	  		this.numbers[i].className='';
+	  	}
+	  	this.numbers[index].className='current';
+
+	  	this.slider=setInterval(function(){
+	  		var list=that.list;
+	  		target=-index*that.imgHeight;
+	  		step=(target-list.offsetTop)/10;
+	  		step=step>0?Math.ceil(step):Math.floor(step);
+	  		if(list.offsetTop!=target){
+	  			list.style.top=list.offsetTop+step+'px';
+	  		}else{
+	  			that.currentIndex=index;
+	  			clearInterval(that.slider);
+	  		}
+	  	},30);
+	  }
+	};
+	var box=document.getElementById('box');
+	new slideShow(box);
+	// 写这段的时候，遇到一个bug，不过解决了
+	// http://stackoverflow.com/questions/16750137/setinterval-with-scope-in-javascript
 </script>
