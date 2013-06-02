@@ -1,0 +1,30 @@
+<style>
+body{font:700 14px/1.5 Arial;margin:0;padding:0 10px;}
+table{clear:both;border:1px solid #000;}
+td{color:#FFF;cursor:pointer;text-align:center;border:1px solid #000;padding:5px;}
+#setting{float:left;clear:left;line-height:28px;margin:10px 0;}
+#setting input{width:50px;font-family:inherit;border:2px solid #CCC;margin:0 5px;padding:4px;}
+#btn{font-size:14px;line-height:18px;color:#fff;text-decoration:none;background:#353535;border-top:1px #999 solid;border-radius:5px;padding:4px 6px;}
+#msg{float:left;clear:both;height:25px;display:none;line-height:25px;margin-bottom:10px;}
+#msg em{width:25px;height:25px;display:inline-block;margin-right:5px;}
+#setting label,#setting input,#setting a,#msg span,#msg em{float:left;}
+</style>
+<script>
+	/*
+	 要求：
+	 1) 任意输入行数或列数, 生成对应表格;
+	 2) 行数, 列数必须为正整数类型, 否则提示非法;(这里我用正则限制1-100, 避免网友测试输入过大值造成浏览器假死)
+	 3) 在生成表格的单元格中随机填入1到15之间的随机数, 并给每个单元格设置随机背景颜色;
+	 4) 点击任意单元格, 将其数和背景颜色输出显示;
+	 5) 效率要求：100*100生成表格时间小于3秒;
+	 6) 代码中要用到事件代理机制;
+	 7) 设计一种简单机制, 使单元格数小于255*255*255时, 颜色不重复
+	 8) 要求符合w3c验证, 兼容IE, Firefox, chrome等浏览器
+	*/
+</script>
+<div id="setting">
+    <label>行数</label><input type="text" id="row" />
+    <label>列数</label><input type="text" id="col" />
+    <a href="javascript:;" id="btn">生成表格</a>
+</div>
+<div id="msg">123</div>

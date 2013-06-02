@@ -7,12 +7,13 @@
 		html,body,li,ul{margin: 0;padding: 0;list-style: none;}
 		html,body{background: #13c2d2;height: 100%;}
 		footer{position: fixed;bottom: 0;width: 100%;height: 100px;background: #b78f69;}
-		#links,#content{width: 80%;margin: 0 auto;position: relative;}
+		#links{width: 80%;margin: 0 auto;position: relative;}
 		#links li{float: left;}
 		#links li a{color: #fff;text-decoration: none;line-height: 50px;display: inline-block;padding:0 10px;}
 		#links li a:hover{border-top: 5px solid #000;margin-top: -5px;}
-		#pixel_1{position: absolute;top: -200px;left: 800px;}
-		#pixel_2{position: absolute;top: -200px;left: 800px;}
+		#pixel_1{position: absolute;top: -200px;left: 70%;}
+		#pixel_2{position: absolute;top: -200px;left: 70%;}
+		#content_wrap{position: absolute;}
 		#content{height: 500px;}
 		#fakefish{position: absolute;top: 50px;}
 		#cloud_1,#cloud_2{position: absolute;}
@@ -23,7 +24,7 @@
 	</style>
 </head>
 <body>
-	
+
 	<div id="content_wrap">
 		<div id="content">
 			<img src="img/fakefish.png" alt="fakefish" id="fakefish"/>
@@ -32,9 +33,10 @@
 		</div>
 	</div>	
 	<footer>
+		<img src="img/pixel_1.png" alt="fakefish" id="pixel_1"/>
+		<img src="img/pixel_2.png" alt="fakefish" id="pixel_2"/>
 		<div id="links">
-			<img src="img/pixel_1.png" alt="fakefish" id="pixel_1"/>
-			<img src="img/pixel_2.png" alt="fakefish" id="pixel_2"/>
+			
 			<ul>
 				<li><a href="http://wujinzhilu.com/">无尽之路</a></li>
 				<li><a href="https://github.com/Fakefish/fakefish.github.com/issues?labels=blog">Github Blog</a></li>
@@ -69,7 +71,7 @@
 			var y=event.clientY;
 			var zoom=parseFloat(x/document.documentElement.clientWidth);
 			var zoomH=parseFloat(y/document.documentElement.clientHeight);
-			
+
 			p1.style.left=preLeft1+zoom*50+'px';
 			p2.style.left=preLeft2+zoom*25+'px';
 			ff.style.left=preLeft3+zoom*100+'px';
@@ -77,6 +79,11 @@
 			cloud2.style.left=cLeft2-zoom*250+'px';
 
 			// cloud2.style.top=cTop2+zoomH*100+'px';
+		}
+
+		window.onresize = function(){
+			p1.style.left="70%";
+			p2.style.left="70%";
 		}
 	</script>
 </body>
