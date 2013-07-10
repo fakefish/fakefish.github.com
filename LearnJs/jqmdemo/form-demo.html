@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>jqm demo</title>
+  
+  <meta name="viewport" content="width=device-width,minimum-scale=1,maximum-scale=1">
+  <link rel="stylesheet" href="http://code.jquery.com/mobile/latest/jquery.mobile.css">
+  <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+  <script src="http://code.jquery.com/mobile/latest/jquery.mobile.js"></script>
+</head>
+<body>
+  <div data-role="page">
+    
+    <div data-role="header">
+      <h1>form</h1>
+      <a href="index.html" target="_self" data-role="button" data-icon="home">首页</a>
+    </div>
+
+    <div data-role="content">
+      <h3>form相关</h3>
+
+      <ol data-role="listview" data-inset="true">
+        <li><a href="#radio-page">设置radio</a></li>
+        <li><a href="#checkbox-page">设置checkbox</a></li>
+        <li><a href="#range-page">设置range</a></li>
+      </ol>
+    </div>
+
+    <div data-role="footer">
+      <h3>&copy; fakefish from <a href="http://www.w3cplus.com/demo/jqm/basic/index.html">W3CPLUS</a></h3>
+    </div>
+  </div>
+
+  <div data-role="page" id="radio-page" data-add-back-btn="true">
+    
+    <div data-role="header" data-add-back-btn="true">
+      <h1>设置radio</h1>
+    </div>
+
+    <div data-role="content">
+      <h3>1、垂直模式</h3>
+      <fieldset data-role="controlgroup">
+        <legend>专业</legend>
+        <input type="radio" id="major_comp" name="major" value="1">
+        <label for="major_comp">计算机</label>
+
+        <input type="radio" id="major_eng" value="2" name="major">
+        <label for="major_eng">英语</label>
+
+        <input type="radio" id="major_math" value="3" name="major">
+        <label for="major_math">数学</label>
+      </fieldset>
+      
+      <h3>2、水平模式</h3>
+      <fieldset data-role="controlgroup" data-type="horizontal">
+        <legend>专业</legend>
+        <input type="radio" id="major_comp" name="major" value="1">
+        <label for="major_comp">计算机</label>
+
+        <input type="radio" id="major_eng" value="2" name="major">
+        <label for="major_eng">英语</label>
+
+        <input type="radio" id="major_math" value="3" name="major">
+        <label for="major_math">数学</label>
+      </fieldset>
+    </div>
+
+    <div data-role="footer">
+      <h3>&copy; fakefish from <a href="http://www.w3cplus.com/demo/jqm/basic/index.html">W3CPLUS</a></h3>
+    </div>
+
+
+  </div>
+  <div data-role="page" id="checkbox-page" data-add-back-btn="true">
+    
+    <div data-role="header" data-add-back-btn="true">
+      <h1>设置checkbox</h1>
+    </div>
+
+    <div data-role="content">
+      <h3>1、垂直模式</h3>
+      <fieldset data-role="controlgroup">
+        <legend>专业</legend>
+        <input type="checkbox" id="major_comp" name="major" value="1">
+        <label for="major_comp">计算机</label>
+
+        <input type="checkbox" id="major_eng" value="2" name="major">
+        <label for="major_eng">英语</label>
+
+        <input type="checkbox" id="major_math" value="3" name="major">
+        <label for="major_math">数学</label>
+
+      </fieldset>
+
+      <h3>2、水平模式</h3>
+      <fieldset data-role="controlgroup" data-type="horizontal">
+        <legend>专业</legend>
+        <input type="checkbox" id="major_comp" name="major" value="1">
+        <label for="major_comp">计算机</label>
+
+        <input type="checkbox" id="major_eng" value="2" name="major">
+        <label for="major_eng">英语</label>
+
+        <input type="checkbox" id="major_math" value="3" name="major">
+        <label for="major_math">数学</label>
+
+      </fieldset>
+    </div>
+
+    <div data-role="footer">
+      <h3>&copy; fakefish from <a href="http://www.w3cplus.com/demo/jqm/basic/index.html">W3CPLUS</a></h3>
+    </div>
+  </div>
+  <div data-role="page" id="range-page" data-add-back-btn="true">
+    <div data-role="header" data-add-back-btn="true">
+      <h1>设置range</h1>
+    </div>
+
+    <div data-role="content">
+      <label for="vol_range">range:</label>
+      <input type="range" id="vol_range" value="3" min="1" max="20" step="2">
+    </div>
+
+    <div data-role="footer">
+      <h3>&copy; fakefish from <a href="http://www.w3cplus.com/demo/jqm/basic/index.html">W3CPLUS</a></h3>
+    </div>
+  </div>
+</body>
+</html>
