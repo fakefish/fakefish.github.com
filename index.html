@@ -1,89 +1,160 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!doctype html>
+<html lang="en">
 <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<title>fakefish's page</title>
-	<style>
-		html,body,li,ul{margin: 0;padding: 0;list-style: none;}
-		html,body{background: #13c2d2;height: 100%;}
-		footer{position: fixed;bottom: 0;width: 100%;height: 100px;background: #b78f69;}
-		#links{width: 80%;margin: 0 auto;position: relative;}
-		#links li{float: left;}
-		#links li a{color: #fff;text-decoration: none;line-height: 50px;display: inline-block;padding:0 10px;}
-		#links li a:hover{border-top: 5px solid #000;margin-top: -5px;}
-		#pixel_1{position: absolute;top: -200px;left: 70%;}
-		#pixel_2{position: absolute;top: -200px;left: 70%;}
-		#content_wrap{position: absolute;}
-		#content{height: 500px;}
-		#fakefish{position: absolute;top: 50px;}
-		#cloud_1,#cloud_2{position: absolute;}
-		#cloud_1{width: 300px;left: 200px;top:230px;}
-		#cloud_2{width: 200px;left: 400px;top:200px;}
-		#links p{clear:left;color: #fff;position: absolute;top: 40px;}
-		#links p a{color:#fff;}
-	</style>
+  <meta charset="UTF-8">
+  <title>fakefish</title>
+
+  <style>
+  html{
+    margin: 0;
+    padding: 0;
+    background: url(img/bg.jpg);
+    -webkit-animation:bgmove 40s linear;
+    -webkit-animation-iteration-count:infinite;
+    font-family: 'SourceCodeProLight';
+    font-size: 18px;
+  }
+  h1,h2,h3{
+    font-family: 'SourceCodeProBold';
+    font-size: 22px; 
+    text-transform: uppercase;
+    margin: 0;
+  }
+  h3{
+    text-transform: capitalize;
+    font-family: 'SourceCodeProExtraLight';
+    font-weight: normal;
+  }
+  li{list-style: none;margin: 0;padding: 0;}
+  .container{
+    background: #fff;
+    width: 90%;
+    margin: 5% auto;
+    box-shadow: 0px 0px 2px #333;
+    padding: 20px 10px;
+    position: relative;
+  }
+  header{
+    display: inline-block;
+    position: absolute;
+    width: 300px;
+    height: 100%;
+    bottom: 0;
+    border-right: 1px solid #ccc;
+  }
+  header h3{
+    font-size: 16px;
+    color: #5c5c5c;
+  }
+  header .bottom{
+    position: absolute;
+    bottom: 20px;
+  }
+  header .top img{
+    position: absolute;
+    width: 200px;
+    right: 0;
+    top: 20px;
+  }
+  article{
+    margin-left: 320px;
+  }
+  @font-face{
+    font-family:'SourceCodeProLight';
+    src:url('font/SourceCodePro-Light.ttf') format('truetype');
+  }
+  @font-face{
+    font-family:'SourceCodeProBold';
+    src:url('font/SourceCodePro-Bold.ttf') format('truetype');
+  }
+  @font-face{
+    font-family:'SourceCodeProExtraLight';
+    src:url('font/SourceCodePro-ExtraLight.ttf') format('truetype');
+  }
+  @-webkit-keyframes bgmove{
+    0% {background-position: 0px 0;}
+    10% {background-position: -50px 0;}
+    20% {background-position: -100px 0;}
+    30% {background-position: -150px 0;}
+    40% {background-position: -200px 0;}
+    50% {background-position: -250px 0;}
+    60% {background-position: -300px 0;}
+    70% {background-position: -350px 0;}
+    80% {background-position: -400px 0;}
+    90% {background-position: -450px 0;}
+    100% {background-position: -500px 0;}
+  }
+  .blank_1{
+    height: 10px;
+    width: 100%;
+    background: #fff;
+    box-shadow: 2px 2px 10px #fff;
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
+  .blank_2{
+    height: 10px;
+    width: 100%;
+    background: #fff;
+    box-shadow: 2px 2px 10px #fff;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+  }
+  </style>
 </head>
 <body>
+  <div class="container">
+    <header>
+      <div class="top">
+        <img src="img/github_page_2.jpg">
+      </div>
+      <duv class="bottom">
+        <h1>fakefish</h1>
 
-	<div id="content_wrap">
-		<div id="content">
-			<img src="img/fakefish.png" alt="fakefish" id="fakefish"/>
-			<img src="img/cloud_1.png" alt="cloud" id="cloud_1" />
-			<img src="img/cloud_2.png" alt="cloud" id="cloud_2" />
-		</div>
-	</div>	
-	<footer>
-		<img src="img/pixel_1.png" alt="fakefish" id="pixel_1"/>
-		<img src="img/pixel_2.png" alt="fakefish" id="pixel_2"/>
-		<div id="links">
-			
-			<ul>
-				<li><a href="http://wujinzhilu.com/">无尽之路</a></li>
-				<li><a href="https://github.com/Fakefish/fakefish.github.com/issues?labels=blog">Github Blog</a></li>
-				<li><a href="https://github.com/Fakefish">Github</a></li>
-				<li><a href="http://fakefish.me/LearnJs/Web/learn/index.html">实例索引</a></li>
-				<li><a href="http://fakefish.sinaapp.com/">Old Blog</a></li>
-			</ul>
-			<p>&copy; fakefish 2013, Thanks <a href="https://github.com">Github</a> <a href='http://me.alipay.com/fakefish' id="alipay">请他喝茶</a></p>
-		</div>
-	</footer>
-	<script>
-		var ff=document.getElementById('fakefish');
-		var cloud1=document.getElementById('cloud_1');
-		var cloud2=document.getElementById('cloud_2');
-		var p1=document.getElementById('pixel_1');
-		var p2=document.getElementById('pixel_2');
-
-		var preLeft1=p1.offsetLeft;
-		var preLeft2=p2.offsetLeft;
-		var preLeft3=ff.offsetLeft;
-		var cLeft1=cloud1.offsetLeft;
-		var cLeft2=cloud2.offsetLeft;
-
-		var cTop2=cloud2.offsetTop;
-
-
-		document.onmousemove=window.onload=move;
-
-		function move(event){
-			var event=event||window.event;
-			var x=event.clientX;
-			var y=event.clientY;
-			var zoom=parseFloat(x/document.documentElement.clientWidth);
-			var zoomH=parseFloat(y/document.documentElement.clientHeight);
-
-			p1.style.left=preLeft1+zoom*50+'px';
-			p2.style.left=preLeft2+zoom*25+'px';
-			ff.style.left=preLeft3+zoom*100+'px';
-			cloud1.style.left=cLeft1+zoom*200+'px';
-			cloud2.style.left=cLeft2-zoom*250+'px';
-
-			// cloud2.style.top=cTop2+zoomH*100+'px';
-		}
-
-		window.onresize = function(){
-			p1.style.left="70%";
-			p2.style.left="70%";
-		}
-	</script>
+        <h3>Frondend programmer<br>Intership frondend engineer<br>At AllMobilize.Inc</h3>
+        <span><a href="about.html">more</a></span>
+      </duv>  
+    </header>
+    <article>
+      <section>
+        <h2>links</h2>
+        <ul>
+          <li>
+            <a href="http://wujinzhilu.com">wujinzhilu</a>
+            <p>I put my thinks about PM on that website.</p>
+          </li>
+          <li>
+            <a href="https://github.com/Fakefish/fakefish.github.com/issues?labels=blog">node blog</a>
+            <p>I often write some code on that website(on github).</p>
+          </li>
+          <li>
+            <a href="https://github.com/Fakefish">my github</a>
+            <p>as you see, it's my github page :)</p>
+          </li>
+          <li>
+            <a href="http://wujinzhilu.com/demo">demos</a>
+            <p>sometimes i like to write some code i love or i have to.</p>
+          </li>
+        </ul>
+      </section>
+      <section>
+        <h2>friends</h2>
+        <ul>
+          <li><a href="http://www.imsuzie.com/">imsuzie</a></li>
+        </ul>
+      </section>
+    </article>
+    <!-- <div class="blank_1"></div>
+    <div class="blank_2"></div> -->
+  </div>
+  <script>
+    window.onresize=function(){
+      width=document.body.offsetWidth;
+      height=document.body.offsetHeight;
+      console.log(width+" "+height)
+    }
+  </script>
 </body>
+</html>
