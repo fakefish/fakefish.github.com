@@ -98,6 +98,15 @@ window.onload=function(){
 	}
 	body.insertBefore(autoplay2,sm);
 
+  // 智能点的自动
+	var afind=document.createElement('a');
+	afind.className='btns';
+	afind.innerHTML='稍微智能的自动';
+	afind.onclick=function(){
+		Snake.autoAfind();
+	}
+	body.insertBefore(afind,sm);
+
 	for(i=0;i<n;i++){
 		item=document.createElement('li');
 		frag.appendChild(item);
@@ -323,10 +332,13 @@ window.onload=function(){
 			this.pointer();
 			this.move();
 		},
+		
+
 		times:0,
 		i:0,
 		bCircle:false,
 		circleFlag:false,
+		
 		circle:function(){
 			flag=this.circleFlag;
 			var head=this.body[0].toString();
@@ -383,71 +395,107 @@ window.onload=function(){
 		},
 
 
-		bBfs:false,
-		autoPlayByBFS:function(){
+		// bBfs:false,
+		// autoPlayByBFS:function(){
+		// 	this.init();
+		// 	this.bBfs=true;
+		// 	this.autoCom=true;
+		// 	// for(var i=0,len=bgData.length;i<len;i++){
+		// 	// 	bgData[i].push(1);
+		// 	// }
+			
+		// 	this.speed=1;
+		// 	this.pointer();
+		// 	this.move();
+		// },
+		// snakeBFS:function(){
+		// 	var body=this.body;
+		// 	var n=new node(body[0],this.points[0]);
+			
+		// }
+		autoAfind:function(){
 			this.init();
-			this.bBfs=true;
-			this.autoCom=true;
-			// for(var i=0,len=bgData.length;i<len;i++){
-			// 	bgData[i].push(1);
-			// }
-			
-			this.speed=1;
+			this.speed=30;
 			this.pointer();
-			this.move();
+			var that=this;
+			var next;
+			timer=setInterval(function(){
+				next=that.afindDirection(that.body[0],that.body[1],that.points[0])
+				that.direction([next]);
+			},that.speed);
 		},
-		snakeBFS:function(){
-			var body=this.body;
-			var n=new node(body[0],this.points[0]);
+		// 这个函数的作用：
+	  // 判断食物的点在头部的哪一个方向，
+	  // 返回相对于蛇身体的前进指令或者
+	  // 左右指令
+	  // d:直行
+	  // l:左转
+	  // r:右转
+	  afindDirection:function(first,second,target){
+			var x=first[0];
+			var y=first[1];
+			var x1=second[0];
+			var y1=second[1];
+			var tx=target[0];
+			var ty=target[1];
+			var xd=tx-x;
+			var yd=ty-y;
+			var xd1=tx-x1;
+			var yd1=ty-y1;
+			var dir;
+			var d=Math.sqrt(xd1*xd1+yd1*yd1)-Math.sqrt(xd*xd+yd*yd);
+			// 初步判断
+			// 判断头到食物的距离是否比身体到食物距离短
+			// 短则是食物在头部前方或者左右
+			var axd=Math.abs(xd);
+			var axd1=Math.abs(xd1);
+			var ayd=Math.abs(yd);
+			var ayd1=Math.abs(yd1);
+			if(d>0){
+				dir='d';
+			}else if((y==y1&&y==ty&&Math.abs(xd)<Math.abs(xd1))||(x==x1&&x==tx&&Math.abs(yd)<Math.abs(yd1))){
+				dir='d';
+			}else if((yd==0&&yd1>0)||(xd==0&&xd1>0)){
+				dir='r';
+			}else{
+				dir='l';
+			}
+			// 二次判断
+			// 判断初步方案是否可行
+			// 先确定下一个点的位置
+			var next;
+			switch(dir){
+				case 'd':next=[x-x1+x,y-y1+y];break;
+				case 'r':next=[y-y1+x,x-x1+y];break;
+				case 'l':next=[x-(y-y1),y-(x1-x)];break;
+			}
+			// 判断是否出界或者是身体的点
+			// 下个点不能走，那么
+			if(!this.isOk([next])){
+				dir='d';
+				next=[x-x1+x,y-y1+y];
+				// 如果不能左转，则友转
+				if(!this.isOk([next])){
+					dir='r';
+					next=[y-y1+x,x-x1+y];
+				}
+			}
+				
 			
-		}
+			
+			return next;
+		},
+		isOk:function(next){
+			return (
+				next[0][1]<w && 
+				next[0][0]<h &&
+				next[0][1]>-1 &&
+				next[0][0]>-1 &&
+				!this.isContain(next)
+			);
+		},
+
 	};
-	var node=function(top,target){
-		this.top=top;
-		var x=top[0];
-		var y=top[1];
-		var xd=target[0]-x;
-		var yd=target[1]-y;
-		if(xd>0){
-			if(yd>0){
-				// right bottom
-				this.left=[x+1,y];
-				this.right=[x,y+1];
-			}else if(yd<0){
-				// left bottom
-				this.left=[x,y-1];
-				this.right=[x+1,y];
-			}else{
-				// bottom
-				this.left=[x+1,y];
-				this.right=[x+1,y];
-			}
-		}else if(xd<0){
-			if(yd>0){
-				// right top
-				this.left=[x,y+1];
-				this.right=[x-1,y];
-			}else if(yd<0){
-				// left top
-				this.left=[x,y-1];
-				this.right=[x+1,y];
-			}else{
-				// top
-				this.left=[x-1,y];
-				this.right=[x-1,y];
-			}
-		}else{
-			if(yd>0){
-				// right
-				this.left=[x,y+1];
-				this.right=[x,y+1];
-			}else{
-				// left
-				this.left=[x,y-1];
-				this.right=[x,y-1];
-			}
-		}
-	}
 }
 
 </script>
