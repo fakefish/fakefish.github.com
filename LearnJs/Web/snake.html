@@ -415,7 +415,7 @@ window.onload=function(){
 		// }
 		autoAfind:function(){
 			this.init();
-			this.speed=30;
+			this.speed=1;
 			this.pointer();
 			var that=this;
 			var next;
@@ -451,11 +451,9 @@ window.onload=function(){
 			var axd1=Math.abs(xd1);
 			var ayd=Math.abs(yd);
 			var ayd1=Math.abs(yd1);
-			if(d>0){
+			if(axd<axd1&&axd!=0||ayd<ayd1&&ayd!=0){
 				dir='d';
-			}else if((y==y1&&y==ty&&Math.abs(xd)<Math.abs(xd1))||(x==x1&&x==tx&&Math.abs(yd)<Math.abs(yd1))){
-				dir='d';
-			}else if((yd==0&&yd1>0)||(xd==0&&xd1>0)){
+			}else if((yd==0&&yd1>0&&axd==axd1)||(xd==0&&xd1>0&&ayd==ayd1)){
 				dir='r';
 			}else{
 				dir='l';
@@ -469,15 +467,23 @@ window.onload=function(){
 				case 'r':next=[y-y1+x,x-x1+y];break;
 				case 'l':next=[x-(y-y1),y-(x1-x)];break;
 			}
+			var d=['l','d','r'],i;
 			// 判断是否出界或者是身体的点
 			// 下个点不能走，那么
 			if(!this.isOk([next])){
-				dir='d';
-				next=[x-x1+x,y-y1+y];
-				// 如果不能左转，则友转
-				if(!this.isOk([next])){
-					dir='r';
-					next=[y-y1+x,x-x1+y];
+				var ne;
+				for(i=0;i<3;i++){
+					if(d[i]!=dir){
+						switch(d[i]){
+							case 'd':ne=[x-x1+x,y-y1+y];break;
+							case 'r':ne=[y-y1+x,x-x1+y];break;
+							case 'l':ne=[x-(y-y1),y-(x1-x)];break;
+						}
+						if(this.isOk([ne])){
+							next=ne;
+							break;
+						}
+					}
 				}
 			}
 				
