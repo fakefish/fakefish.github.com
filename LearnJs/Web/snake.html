@@ -279,10 +279,12 @@ window.onload=function(){
 				this.render(this.body);
 				// console.log(this.body)
 			} else {
+				// console.log(next[0]+' '+this.body[0]+' '+this.body[1]);
 				this.stop();
 			}
 		},
 		stop:function(){
+			console.log(this.body.length)
 			clearInterval(timer);
 			// alert('stop');
 			startBtn.innerHTML="开始";
@@ -415,7 +417,7 @@ window.onload=function(){
 		// }
 		autoAfind:function(){
 			this.init();
-			this.speed=1;
+			this.speed=3;
 			this.pointer();
 			var that=this;
 			var next;
@@ -464,41 +466,63 @@ window.onload=function(){
 			var next;
 			switch(dir){
 				case 'd':next=[x-x1+x,y-y1+y];break;
-				case 'r':next=[y-y1+x,x-x1+y];break;
+				case 'r':next=[y-y1+x,x1-x+y];break;
 				case 'l':next=[x-(y-y1),y-(x1-x)];break;
 			}
 			var d=['l','d','r'],i;
 			// 判断是否出界或者是身体的点
 			// 下个点不能走，那么
+			
 			if(!this.isOk([next])){
 				var ne;
 				for(i=0;i<3;i++){
+					switch(d[i]){
+						
+						case 'r':ne=[y-y1+x,x1-x+y];break;
+						case 'l':ne=[x-(y-y1),y-(x1-x)];break;
+						case 'd':ne=[x-x1+x,y-y1+y];break;
+					}
+					if(this.isOk([ne])){
+						next=ne;
+						dir=d[i];
+						break;
+					}
+				}
+			}
+			// 如果下一个点的左右都不能走，那
+			// 只能换个方向
+			var nr=[next[1]-y+next[0],x-next[0]+next[1]];
+			var nl=[next[0]-(next[1]-y),next[1]-(x-next[0])];
+			if(!this.isOk([nr])&&!this.isOk([nl])){
+				for(i=0;i<3;i++){
 					if(d[i]!=dir){
 						switch(d[i]){
-							case 'd':ne=[x-x1+x,y-y1+y];break;
-							case 'r':ne=[y-y1+x,x-x1+y];break;
+							case 'r':ne=[y-y1+x,x1-x+y];break;
 							case 'l':ne=[x-(y-y1),y-(x1-x)];break;
+							case 'd':ne=[x-x1+x,y-y1+y];break;
 						}
 						if(this.isOk([ne])){
 							next=ne;
+							dir=d[i];
 							break;
 						}
 					}
 				}
 			}
-				
+			
+			
 			
 			
 			return next;
 		},
 		isOk:function(next){
-			return (
-				next[0][1]<w && 
-				next[0][0]<h &&
-				next[0][1]>-1 &&
-				next[0][0]>-1 &&
-				!this.isContain(next)
-			);
+			// console.log(!this.isContain(next))
+			if(next[0][1]<w && next[0][0]<h &&next[0][1]>-1 &&next[0][0]>-1 &&!this.isContain(next)){
+				return true;
+			}else{
+				return false;
+			}
+			
 		},
 
 	};
