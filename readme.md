@@ -21,7 +21,9 @@ Who am i?
 links:
 ====
 
-[另外一个个人页面](http://wujinzhilu.com/)
+[技术博客](http://blog.segmentfault.com/fakefish)
+
+[谈产品博客](http://wujinzhilu.com/)
 
 [Github](https://github.com/fakefish)
 
